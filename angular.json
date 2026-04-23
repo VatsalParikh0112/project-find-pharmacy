@@ -6,6 +6,11 @@
     "analytics": false
   },
   "newProjectRoot": "projects",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "none"
+    }
+  },
   "projects": {
     "project-find-pharmacy": {
       "projectType": "application",
