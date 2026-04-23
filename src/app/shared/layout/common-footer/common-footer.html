@@ -1,0 +1,65 @@
+<footer class="flex flex-col p-2 lg:p-8 bg-emerald-500 text-white">
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:justify-between items-center px-2 py-4 md:items-start lg:p-8"
+  >
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center gap-2">
+        <app-white-find-pharma-logo class="flex size-8" />
+        <span class="text-lg font-bold">FindMy Pharma</span>
+      </div>
+      <span class="text-sm">Your trusted partner in pharmaceutical discovery.</span>
+    </div>
+
+    <div class="md:flex flex-col gap-2 hidden">
+      <span class="font-bold">Quick Links</span>
+      <div routerLink="/home" class="text-sm hover:cursor-pointer">Home</div>
+      <div routerLink="/about" class="text-sm hover:cursor-pointer">About Us</div>
+      <div routerLink="/contact" class="text-sm hover:cursor-pointer">Contact Us</div>
+      <div routerLink="/follow" class="text-sm hover:cursor-pointer">Follow Us</div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <span class="font-bold">Support</span>
+      <div class="flex items-center gap-2">
+        <app-whatsapp-icon-svg class="flex text-red-100 size-4" />
+        <a href="https://wa.me/917990876497" target="_blank" class="text-xs">+91 7990876497</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <app-mail-icon-svg class="flex text-red-100 size-4" />
+        <a href="mailto:parikhvatsal75@gmail.com" target="_blank" class="text-xs"
+          >parikhvatsal75@gmail.com</a
+        >
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <span class="font-bold">Follow Us</span>
+      <div class="flex gap-4">
+        <a href="https://www.facebook.com/FindMyPharma" target="_blank" rel="noopener noreferrer">
+          <app-facebook-filled-icon-svg class="flex size-5 hover:cursor-pointer text-white" />
+        </a>
+
+        <a href="https://twitter.com/FindMyPharma" target="_blank" rel="noopener noreferrer">
+          <app-twitter-icon-svg class="flex size-5 hover:cursor-pointer text-white" />
+        </a>
+
+        <a href="https://www.instagram.com/FindMyPharma" target="_blank" rel="noopener noreferrer">
+          <app-instagram-icon-svg class="flex size-5 hover:cursor-pointer text-white" />
+        </a>
+
+        <a
+          href="https://www.linkedin.com/company/FindMyPharma"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <app-linkedin-icon-svg class="flex size-5 hover:cursor-pointer text-white" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col w-full text-center gap-2">
+    <hr />
+    <span class="text-xs"> © 2026 FindMy Pharma. All rights reserved. </span>
+  </div>
+</footer>
