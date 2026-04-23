@@ -1,0 +1,100 @@
+<section class="flex flex-col py-12 px-2 lg:px-8 gap-4">
+  <div class="flex flex-col gap-2">
+    <span class="text-emerald-500">Features</span>
+    <span class="font-semibold text-xl">Why Choose Find My Pharma?</span>
+    <span class="text-sm opacity-70 leading-relaxed max-w-5xl">
+      When you or your loved ones need medicine, every minute matters. Find My Pharma helps you
+      quickly locate nearby pharmacies, check availability, and get responses without hassle. We’re
+      here to make sure you spend less time searching and more time focusing on what truly matters —
+      your health.
+    </span>
+  </div>
+  <div class="flex flex-col p-4 rounded-lg gap-4 items-center bg-neutral-200">
+    <div class="flex flex-col gap-2 text-center w-full">
+      <span class="font-bold">Everything You Need, One Smart Search</span>
+      <span class="text-sm opacity-70"
+        >Our platform simplifies your healthcare journey by bringing all pharmacy services to your
+        fingertips.</span
+      >
+    </div>
+    <div class="flex flex-col lg:flex-row justify-center gap-4 w-full">
+      <div
+        class="p-4 bg-white shadow-lg rounded-lg flex flex-col gap-2 items-center text-center w-full"
+      >
+        <div class="p-2 bg-emerald-200 w-fit rounded-lg">
+          <app-hand-icon-svg class="flex size-5" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-semibold text-lg">Search Prescription & OTC medications nearby</span>
+          <span class="opacity-70"
+            >Find your medications without calling multiple pharmacies, Check availability</span
+          >
+        </div>
+      </div>
+      <div
+        class="p-4 bg-white shadow-lg rounded-lg flex flex-col gap-2 items-center text-center w-full"
+      >
+        <div class="p-2 bg-emerald-200 w-fit rounded-lg">
+          <app-injection-icon-svg class="flex size-5" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-semibold text-lg">Locate pharmacies with medical supplies</span>
+          <span class="opacity-70"
+            >From bandages to blood pressure monitors, find all medical supplies for you</span
+          >
+        </div>
+      </div>
+      <div
+        class="p-4 bg-white shadow-lg rounded-lg flex flex-col gap-2 items-center text-center w-full"
+      >
+        <div class="p-2 bg-emerald-200 w-fit rounded-lg">
+          <app-hospital-icon-svg class="flex size-5" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-semibold text-lg">Find compounding services easily</span>
+          <span class="opacity-70"
+            >Locate specialized pharmacies that offer custom medication compounding for you</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full rounded-lg relative">
+    <div
+      #slider
+      (scroll)="onScroll()"
+      class="flex overflow-x-auto rounded-lg snap-x snap-mandatory no-scrollbar scroll-smooth"
+    >
+      @for (slide of slides; track slide.title) {
+      <div class="min-w-full h-102 relative snap-center flex items-center">
+        <img
+          [src]="slide.image"
+          [alt]="slide.title"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-emerald-500/50"></div>
+        <div class="relative z-10 px-4 md:px-16 text-white max-w-2xl flex flex-col gap-3">
+          <span class="text-xl md:text-2xl font-bold"> {{ slide.title }} </span>
+          <span class="text-sm md:text-base opacity-90 leading-relaxed"> {{ slide.desc }} </span>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="absolute bottom-4 p-2 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+      @for (slide of slides; track slide.title; let i = $index) {
+      <button
+        type="button"
+        (click)="goToSlide(i)"
+        class="size-2.5 rounded-full transition-all duration-300"
+        [class.w-6]="currentIndex === i"
+        [class.w-2.5]="currentIndex !== i"
+        [class.bg-white]="currentIndex === i"
+        [class.bg-white/50]="currentIndex !== i"
+        aria-label="Go to slide {{ i + 1 }}"
+      ></button>
+      }
+    </div>
+  </div>
+</section>

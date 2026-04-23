@@ -27,6 +27,6 @@ export class CommonSidebar {
     { label: 'Home', route: 'home' },
     { label: 'About Us', route: 'about' },
     { label: 'Contact Us', route: 'contact' },
-    { label: 'Follow Us', route: 'common/follow-us' },
+    { label: 'Follow Us', route: 'follow-us' },
   ];
 }

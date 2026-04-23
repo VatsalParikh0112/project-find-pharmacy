@@ -5,17 +5,17 @@
   <div class="flex gap-10 items-center">
     <div class="lg:flex hidden items-center gap-10">
       @for (item of menuItems; track item.route) {
-        <button
-          #rla="routerLinkActive"
-          [routerLink]="item.route"
-          routerLinkActive="bg-emerald-500 hover:bg-emerald-400 text-white rounded-lg"
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="p-2 text-black cursor-pointer outline-none hover:rounded-lg rounded-lg"
-          [class.hover:bg-neutral-100]="!rla.isActive"
-          (click)="scrollToTop()"
-        >
-          {{ item.label }}
-        </button>
+      <button
+        #rla="routerLinkActive"
+        [routerLink]="item.route"
+        routerLinkActive="bg-emerald-500 hover:bg-emerald-400 text-white rounded-lg"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="p-2 text-black cursor-pointer outline-none hover:rounded-lg rounded-lg"
+        [class.hover:bg-neutral-100]="!rla.isActive"
+        (click)="scrollToTop()"
+      >
+        {{ item.label }}
+      </button>
       }
     </div>
     <div class="flex items-center gap-4">
