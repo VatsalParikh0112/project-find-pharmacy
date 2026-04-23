@@ -1,0 +1,37 @@
+<section
+  class="flex fixed top-0 z-20 w-full justify-between items-center p-4 h-16 bg-white border-b border-neutral-200"
+>
+  <app-find-pharma-logo class="flex size-10" />
+  <div class="flex gap-10 items-center">
+    <div class="lg:flex hidden items-center gap-10">
+      @for (item of menuItems; track item.route) {
+        <button
+          #rla="routerLinkActive"
+          [routerLink]="item.route"
+          routerLinkActive="bg-emerald-500 hover:bg-emerald-400 text-white rounded-lg"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="p-2 text-black cursor-pointer outline-none hover:rounded-lg rounded-lg"
+          [class.hover:bg-neutral-100]="!rla.isActive"
+          (click)="scrollToTop()"
+        >
+          {{ item.label }}
+        </button>
+      }
+    </div>
+    <div class="flex items-center gap-4">
+      <button
+        class="flex items-center justify-center p-2 rounded-lg gap-2 border border-emerald-500 bg-emerald-500 text-white cursor-pointer outline-none focus:outline-none"
+      >
+        <app-user-icon-svg class="size-5 flex" />
+        <span class="text-sm hidden lg:block">Patient Login</span>
+      </button>
+      <button
+        class="hidden lg:flex items-center justify-center p-2 rounded-lg gap-2 border border-emerald-500 text-emerald-500 cursor-pointer outline-none focus:outline-none"
+      >
+        <app-user-icon-svg class="size-4 flex" />
+        <span class="text-sm">Pharmacy Login</span>
+      </button>
+      <app-menu-icon-svg (click)="openSidebar()" class="size-5 flex text-black lg:hidden" />
+    </div>
+  </div>
+</section>
