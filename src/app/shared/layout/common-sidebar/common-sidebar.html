@@ -1,24 +1,55 @@
+<!-- SIDEBAR -->
 <section
   #sidebar
-  class="flex flex-col fixed right-0 top-0 h-screen w-screen md:max-w-xs bg-emerald-900 shadow-xl transform translate-x-0 opacity-100 animate-[slideIn_0.3s_ease-out] will-change-transform overflow-y-auto"
+  class="fixed right-0 top-0 flex h-screen w-full flex-col overflow-y-auto bg-white shadow-2xl animate-[slideIn_0.3s_ease-out] md:max-w-sm"
 >
-  <div class="flex items-center justify-end px-4 h-16 border-b border-emerald-700">
-    <app-close-icon-svg (click)="closeSidebar(sidebar)" class="size-4 text-white cursor-pointer" />
+  <!-- Header -->
+  <div class="flex h-16 items-center justify-between border-b border-neutral-200 px-4">
+    <div class="flex items-center gap-3">
+      <app-find-pharma-logo class="flex size-9" />
+
+      <span class="font-semibold text-neutral-800"> Find My Pharmacy </span>
+    </div>
+
+    <button
+      (click)="closeSidebar(sidebar)"
+      class="flex size-10 cursor-pointer items-center justify-center rounded-xl transition-all duration-300 hover:bg-neutral-100"
+    >
+      <app-close-icon-svg class="size-4 text-black" />
+    </button>
   </div>
 
-  <div class="flex flex-col py-2">
+  <!-- Menu -->
+  <div class="flex flex-col gap-2 p-4">
     @for (item of menuItems; track item.route) {
     <button
       #rla="routerLinkActive"
       [routerLink]="item.route"
-      routerLinkActive="bg-emerald-600"
+      routerLinkActive="bg-emerald-500 text-white"
       [routerLinkActiveOptions]="{ exact: true }"
-      class="p-4 text-left text-white font-medium cursor-pointer outline-none focus:outline-none"
-      [class.hover:bg-emerald-800]="!rla.isActive"
+      class="rounded-xl px-4 py-3 text-left text-sm font-medium text-neutral-700 transition-all duration-300 cursor-pointer hover:bg-neutral-100"
+      [class.hover:bg-emerald-400]="rla.isActive"
       (click)="closeSidebar(sidebar)"
     >
       {{ item.label }}
     </button>
     }
+  </div>
+
+  <!-- Bottom Buttons -->
+  <div class="mt-auto flex flex-col gap-3 border-t border-neutral-200 p-4">
+    <button
+      class="flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 text-sm font-medium text-white"
+    >
+      <app-user-icon-svg class="flex size-5" />
+      <span>Patient Login</span>
+    </button>
+
+    <button
+      class="flex items-center justify-center gap-2 rounded-xl border border-emerald-500 px-4 py-3 text-sm font-medium text-emerald-500"
+    >
+      <app-user-icon-svg class="flex size-5" />
+      <span>Pharmacy Login</span>
+    </button>
   </div>
 </section>

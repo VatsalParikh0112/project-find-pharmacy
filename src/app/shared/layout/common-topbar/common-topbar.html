@@ -7,11 +7,11 @@
       @for (item of menuItems; track item.route) {
       <button
         #rla="routerLinkActive"
+        class="px-4 py-2 text-black cursor-pointer outline-none hover:rounded-lg rounded-lg"
         [routerLink]="item.route"
-        routerLinkActive="bg-emerald-500 hover:bg-emerald-400 text-white rounded-lg"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="p-2 text-black cursor-pointer outline-none hover:rounded-lg rounded-lg"
         [class.hover:bg-neutral-100]="!rla.isActive"
+        routerLinkActive="bg-emerald-500 hover:bg-emerald-400 text-white rounded-lg"
         (click)="scrollToTop()"
       >
         {{ item.label }}
@@ -20,13 +20,13 @@
     </div>
     <div class="flex items-center gap-4">
       <button
-        class="flex items-center justify-center p-2 rounded-lg gap-2 border border-emerald-500 bg-emerald-500 text-white cursor-pointer outline-none focus:outline-none"
+        class="flex items-center justify-center p-2 lg:px-4 lg:py-2 rounded-lg gap-2 border border-emerald-500 bg-emerald-500 text-white cursor-pointer outline-none focus:outline-none"
       >
         <app-user-icon-svg class="size-5 flex" />
         <span class="text-sm hidden lg:block">Patient Login</span>
       </button>
       <button
-        class="hidden lg:flex items-center justify-center p-2 rounded-lg gap-2 border border-emerald-500 text-emerald-500 cursor-pointer outline-none focus:outline-none"
+        class="hidden lg:flex items-center justify-center px-4 py-2 rounded-lg gap-2 border border-emerald-500 text-emerald-500 cursor-pointer outline-none focus:outline-none"
       >
         <app-user-icon-svg class="size-4 flex" />
         <span class="text-sm">Pharmacy Login</span>

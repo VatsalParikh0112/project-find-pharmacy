@@ -1,19 +1,112 @@
 <section
-  class="flex flex-col items-start bg-linear-to-br from-emerald-700 to-emerald-900 py-32 px-2 lg:px-8 gap-4 text-white"
+  class="flex flex-col gap-10 bg-linear-to-br from-emerald-700 to-emerald-900 px-4 py-20 text-white lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-28"
 >
-  <div class="flex flex-col gap-1">
-    <span class="text-sm">Welcome to Find My Pharmacy</span>
-    <span class="text-xl font-bold"
-      >Find the Right Pharmacy, <span class="text-emerald-400">Faster & Smarter</span></span
-    >
+  <!-- Left Content -->
+  <div class="flex max-w-3xl flex-col gap-6">
+    <div class="flex flex-col gap-3">
+      <span class="w-fit rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm">
+        Welcome to Find My Pharmacy
+      </span>
+
+      <span class="text-2xl font-bold leading-tight lg:text-4xl">
+        Find the Right Pharmacy,
+        <span class="text-emerald-300">Faster & Smarter</span>
+      </span>
+    </div>
+
+    <span class="max-w-2xl text-sm leading-relaxed text-white/80 lg:text-lg">
+      Tell us what you need, and we’ll instantly connect you with nearby pharmacies that have it in
+      stock. No more calling around — just quick, reliable results, real-time availability, and a
+      seamless way to find your medication without the stress.
+    </span>
+
+    <!-- Buttons -->
+    <div class="flex flex-col gap-4 pt-2 sm:flex-row">
+      <button
+        class="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-4 font-medium transition-all duration-300 hover:bg-emerald-400"
+      >
+        <app-search-icon-svg class="size-5" />
+        <span>Find a Pharmacy</span>
+      </button>
+
+      <button
+        class="flex cursor-pointer items-center justify-center rounded-xl border border-white/20 bg-white/10 px-6 py-4 font-medium transition-all duration-300 hover:bg-white/20"
+      >
+        Explore Services
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex flex-wrap gap-8 pt-4">
+      <div class="flex flex-col">
+        <span class="text-xl font-bold lg:text-2xl">24/7</span>
+        <span class="text-sm text-white/70">Search Access</span>
+      </div>
+
+      <div class="flex flex-col">
+        <span class="text-xl font-bold lg:text-2xl">Fast</span>
+        <span class="text-sm text-white/70">Real-Time Results</span>
+      </div>
+
+      <div class="flex flex-col">
+        <span class="text-xl font-bold lg:text-2xl">Trusted</span>
+        <span class="text-sm text-white/70">Verified Pharmacies</span>
+      </div>
+    </div>
   </div>
-  <div class="text-sm w-full max-w-5xl">
-    Tell us what you need, and we’ll instantly connect you with nearby pharmacies that have it in
-    stock. No more calling around — just quick, reliable results, real-time availability, and a
-    seamless way to find your medication without the stress.
+
+  <!-- Right Card -->
+  <div
+    class="flex w-full max-w-md flex-col gap-6 rounded-3xl border border-white/10 bg-white/10 p-6"
+  >
+    <div class="flex flex-col gap-2">
+      <span class="text-xl font-bold">Quick Search Experience</span>
+
+      <span class="text-sm leading-relaxed text-white/70">
+        Search medicines, compare nearby pharmacies, and save valuable time during urgent
+        situations.
+      </span>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-4 rounded-xl bg-white/10 p-4">
+        <div
+          class="flex size-12 items-center justify-center rounded-lg bg-emerald-400 font-bold text-emerald-950"
+        >
+          1
+        </div>
+
+        <div class="flex flex-col">
+          <span class="font-medium">Search Medicine</span>
+          <span class="text-sm text-white/70"> Enter medicine name & ZIP code </span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 rounded-xl bg-white/10 p-4">
+        <div
+          class="flex size-12 items-center justify-center rounded-lg bg-emerald-400 font-bold text-emerald-950"
+        >
+          2
+        </div>
+
+        <div class="flex flex-col">
+          <span class="font-medium">Compare Pharmacies</span>
+          <span class="text-sm text-white/70"> Check availability nearby </span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 rounded-xl bg-white/10 p-4">
+        <div
+          class="flex size-12 items-center justify-center rounded-lg bg-emerald-400 font-bold text-emerald-950"
+        >
+          3
+        </div>
+
+        <div class="flex flex-col">
+          <span class="font-medium">Visit with Confidence</span>
+          <span class="text-sm text-white/70"> Save time & avoid unnecessary calls </span>
+        </div>
+      </div>
+    </div>
   </div>
-  <button class="bg-emerald-500 cursor-pointer flex p-3 rounded-lg">
-    <app-search-icon-svg class="size-5" />
-    <span class="text-sm">Find a Pharmacy</span>
-  </button>
 </section>
