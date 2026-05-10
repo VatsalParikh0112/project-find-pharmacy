@@ -19,6 +19,13 @@ export class CommonSidebar {
 
     setTimeout(() => {
       this.dialogRef.close();
+
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      });
     }, 300);
   }
 
