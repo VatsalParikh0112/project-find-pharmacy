@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CloseIconSvg } from './close-icon';
+import { CloseIconSvg } from "./close-icon";
 
-describe('CloseIconSvg', () => {
+describe("CloseIconSvg", () => {
   let component: CloseIconSvg;
   let fixture: ComponentFixture<CloseIconSvg>;
 
@@ -16,7 +16,7 @@ describe('CloseIconSvg', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

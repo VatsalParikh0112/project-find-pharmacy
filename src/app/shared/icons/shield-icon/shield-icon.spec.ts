@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ShieldIcon } from './shield-icon';
+import { ShieldIcon } from "./shield-icon";
 
-describe('ShieldIcon', () => {
+describe("ShieldIcon", () => {
   let component: ShieldIcon;
   let fixture: ComponentFixture<ShieldIcon>;
 
@@ -16,7 +16,7 @@ describe('ShieldIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

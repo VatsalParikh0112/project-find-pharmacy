@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { WhatsappIcon } from './whatsapp-icon';
+import { WhatsappIcon } from "./whatsapp-icon";
 
-describe('WhatsappIcon', () => {
+describe("WhatsappIcon", () => {
   let component: WhatsappIcon;
   let fixture: ComponentFixture<WhatsappIcon>;
 
@@ -16,7 +16,7 @@ describe('WhatsappIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

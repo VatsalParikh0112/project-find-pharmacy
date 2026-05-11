@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { InjectionIcon } from './injection-icon';
+import { InjectionIcon } from "./injection-icon";
 
-describe('InjectionIcon', () => {
+describe("InjectionIcon", () => {
   let component: InjectionIcon;
   let fixture: ComponentFixture<InjectionIcon>;
 
@@ -16,7 +16,7 @@ describe('InjectionIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

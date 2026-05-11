@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { Common } from './common';
+import { Common } from "./common";
 
-describe('Common', () => {
+describe("Common", () => {
   let component: Common;
   let fixture: ComponentFixture<Common>;
 
@@ -16,7 +16,7 @@ describe('Common', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

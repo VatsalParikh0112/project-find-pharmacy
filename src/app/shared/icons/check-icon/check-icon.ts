@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-check-icon-svg',
+  selector: "app-check-icon-svg",
   imports: [],
-  templateUrl: './check-icon.svg',
+  templateUrl: "./check-icon.svg",
 })
 export class CheckIcon {}

@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CheckIcon } from './check-icon';
+import { CheckIcon } from "./check-icon";
 
-describe('CheckIcon', () => {
+describe("CheckIcon", () => {
   let component: CheckIcon;
   let fixture: ComponentFixture<CheckIcon>;
 
@@ -16,7 +16,7 @@ describe('CheckIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

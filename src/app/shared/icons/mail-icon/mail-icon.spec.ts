@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MailIcon } from './mail-icon';
+import { MailIcon } from "./mail-icon";
 
-describe('MailIcon', () => {
+describe("MailIcon", () => {
   let component: MailIcon;
   let fixture: ComponentFixture<MailIcon>;
 
@@ -16,7 +16,7 @@ describe('MailIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

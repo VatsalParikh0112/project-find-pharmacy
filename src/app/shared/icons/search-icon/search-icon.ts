@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-search-icon-svg',
+  selector: "app-search-icon-svg",
   imports: [],
-  templateUrl: './search-icon.svg',
+  templateUrl: "./search-icon.svg",
 })
 export class SearchIcon {}

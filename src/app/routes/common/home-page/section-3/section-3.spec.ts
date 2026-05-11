@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { Section3 } from './section-3';
+import { Section3 } from "./section-3";
 
-describe('Section3', () => {
+describe("Section3", () => {
   let component: Section3;
   let fixture: ComponentFixture<Section3>;
 
@@ -16,7 +16,7 @@ describe('Section3', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

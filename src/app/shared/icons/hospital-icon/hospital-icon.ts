@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-hospital-icon-svg',
+  selector: "app-hospital-icon-svg",
   imports: [],
-  templateUrl: './hospital-icon.svg',
+  templateUrl: "./hospital-icon.svg",
 })
 export class HospitalIcon {}

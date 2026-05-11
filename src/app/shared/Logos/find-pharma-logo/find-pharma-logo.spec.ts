@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { FindPharmaLogo } from './find-pharma-logo';
+import { FindPharmaLogo } from "./find-pharma-logo";
 
-describe('FindPharmaLogo', () => {
+describe("FindPharmaLogo", () => {
   let component: FindPharmaLogo;
   let fixture: ComponentFixture<FindPharmaLogo>;
 
@@ -16,7 +16,7 @@ describe('FindPharmaLogo', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-linkedin-icon-svg',
+  selector: "app-linkedin-icon-svg",
   imports: [],
-  templateUrl: './linkedin-icon.svg',
+  templateUrl: "./linkedin-icon.svg",
 })
 export class LinkedinIconSvg {}

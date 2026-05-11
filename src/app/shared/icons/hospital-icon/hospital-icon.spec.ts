@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { HospitalIcon } from './hospital-icon';
+import { HospitalIcon } from "./hospital-icon";
 
-describe('HospitalIcon', () => {
+describe("HospitalIcon", () => {
   let component: HospitalIcon;
   let fixture: ComponentFixture<HospitalIcon>;
 
@@ -16,7 +16,7 @@ describe('HospitalIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
