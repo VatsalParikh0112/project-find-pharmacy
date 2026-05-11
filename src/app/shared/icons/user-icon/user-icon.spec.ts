@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UserIcon } from './user-icon';
+import { UserIcon } from "./user-icon";
 
-describe('UserIcon', () => {
+describe("UserIcon", () => {
   let component: UserIcon;
   let fixture: ComponentFixture<UserIcon>;
 
@@ -16,7 +16,7 @@ describe('UserIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

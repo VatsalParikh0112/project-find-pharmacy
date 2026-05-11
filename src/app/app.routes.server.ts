@@ -1,11 +1,11 @@
-import { ServerRoute, RenderMode } from '@angular/ssr';
-import { commonServerRoutes } from './routes/common/common.routes.server';
+import { ServerRoute, RenderMode } from "@angular/ssr";
+import { commonServerRoutes } from "./routes/common/common.routes.server";
 
 export const serverRoutes: ServerRoute[] = [
   ...commonServerRoutes,
 
   {
-    path: '**',
+    path: "**",
     renderMode: RenderMode.Server,
   },
 ];

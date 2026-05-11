@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SearchIcon } from './search-icon';
+import { SearchIcon } from "./search-icon";
 
-describe('SearchIcon', () => {
+describe("SearchIcon", () => {
   let component: SearchIcon;
   let fixture: ComponentFixture<SearchIcon>;
 
@@ -16,7 +16,7 @@ describe('SearchIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

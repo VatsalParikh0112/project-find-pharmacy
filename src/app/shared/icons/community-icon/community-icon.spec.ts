@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CommunityIcon } from './community-icon';
+import { CommunityIcon } from "./community-icon";
 
-describe('CommunityIcon', () => {
+describe("CommunityIcon", () => {
   let component: CommunityIcon;
   let fixture: ComponentFixture<CommunityIcon>;
 
@@ -16,7 +16,7 @@ describe('CommunityIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

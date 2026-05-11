@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { FacebookFilledIconSvg } from './facebook-filled-icon';
+import { FacebookFilledIconSvg } from "./facebook-filled-icon";
 
-describe('FacebookFilledIconSvg', () => {
+describe("FacebookFilledIconSvg", () => {
   let component: FacebookFilledIconSvg;
   let fixture: ComponentFixture<FacebookFilledIconSvg>;
 
@@ -16,7 +16,7 @@ describe('FacebookFilledIconSvg', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

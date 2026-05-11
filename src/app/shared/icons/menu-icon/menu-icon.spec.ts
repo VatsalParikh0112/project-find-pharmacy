@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MenuIcon } from './menu-icon';
+import { MenuIcon } from "./menu-icon";
 
-describe('MenuIcon', () => {
+describe("MenuIcon", () => {
   let component: MenuIcon;
   let fixture: ComponentFixture<MenuIcon>;
 
@@ -16,7 +16,7 @@ describe('MenuIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CommonFooter } from './common-footer';
+import { CommonFooter } from "./common-footer";
 
-describe('CommonFooter', () => {
+describe("CommonFooter", () => {
   let component: CommonFooter;
   let fixture: ComponentFixture<CommonFooter>;
 
@@ -16,7 +16,7 @@ describe('CommonFooter', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

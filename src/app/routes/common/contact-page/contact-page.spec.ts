@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ContactPage } from './contact-page';
+import { ContactPage } from "./contact-page";
 
-describe('ContactPage', () => {
+describe("ContactPage", () => {
   let component: ContactPage;
   let fixture: ComponentFixture<ContactPage>;
 
@@ -16,7 +16,7 @@ describe('ContactPage', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

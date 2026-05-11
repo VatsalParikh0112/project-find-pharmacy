@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CommonTopbar } from './common-topbar';
+import { CommonTopbar } from "./common-topbar";
 
-describe('CommonTopbar', () => {
+describe("CommonTopbar", () => {
   let component: CommonTopbar;
   let fixture: ComponentFixture<CommonTopbar>;
 
@@ -16,7 +16,7 @@ describe('CommonTopbar', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

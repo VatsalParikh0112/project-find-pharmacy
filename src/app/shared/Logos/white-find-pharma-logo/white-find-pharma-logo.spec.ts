@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { WhiteFindPharmaLogo } from './white-find-pharma-logo';
+import { WhiteFindPharmaLogo } from "./white-find-pharma-logo";
 
-describe('WhiteFindPharmaLogo', () => {
+describe("WhiteFindPharmaLogo", () => {
   let component: WhiteFindPharmaLogo;
   let fixture: ComponentFixture<WhiteFindPharmaLogo>;
 
@@ -16,7 +16,7 @@ describe('WhiteFindPharmaLogo', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

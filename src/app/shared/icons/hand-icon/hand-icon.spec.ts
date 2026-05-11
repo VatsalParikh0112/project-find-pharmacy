@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { HandIconSvg } from './hand-icon';
+import { HandIconSvg } from "./hand-icon";
 
-describe('HandIconSvg', () => {
+describe("HandIconSvg", () => {
   let component: HandIconSvg;
   let fixture: ComponentFixture<HandIconSvg>;
 
@@ -16,7 +16,7 @@ describe('HandIconSvg', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

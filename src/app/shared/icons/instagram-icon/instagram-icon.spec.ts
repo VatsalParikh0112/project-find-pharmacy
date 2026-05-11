@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { InstagramIcon } from './instagram-icon';
+import { InstagramIcon } from "./instagram-icon";
 
-describe('InstagramIcon', () => {
+describe("InstagramIcon", () => {
   let component: InstagramIcon;
   let fixture: ComponentFixture<InstagramIcon>;
 
@@ -16,7 +16,7 @@ describe('InstagramIcon', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-white-find-pharma-logo',
+  selector: "app-white-find-pharma-logo",
   imports: [],
-  templateUrl: './white-find-pharma-logo.svg',
+  templateUrl: "./white-find-pharma-logo.svg",
 })
 export class WhiteFindPharmaLogo {}

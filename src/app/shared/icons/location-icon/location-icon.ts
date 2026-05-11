@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-location-icon-svg',
+  selector: "app-location-icon-svg",
   imports: [],
-  templateUrl: './location-icon.svg',
+  templateUrl: "./location-icon.svg",
 })
 export class LocationIcon {}

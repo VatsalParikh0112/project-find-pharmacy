@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { LinkedinIconSvg } from './linkedin-icon';
+import { LinkedinIconSvg } from "./linkedin-icon";
 
-describe('LinkedinIconSvg', () => {
+describe("LinkedinIconSvg", () => {
   let component: LinkedinIconSvg;
   let fixture: ComponentFixture<LinkedinIconSvg>;
 
@@ -16,7 +16,7 @@ describe('LinkedinIconSvg', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-shield-icon-svg',
+  selector: "app-shield-icon-svg",
   imports: [],
-  templateUrl: './shield-icon.svg',
+  templateUrl: "./shield-icon.svg",
 })
 export class ShieldIcon {}
