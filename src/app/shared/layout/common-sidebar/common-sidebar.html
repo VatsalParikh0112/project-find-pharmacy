@@ -1,9 +1,7 @@
-<!-- SIDEBAR -->
 <section
   #sidebar
   class="fixed right-0 top-0 flex h-screen w-full flex-col overflow-y-auto bg-white shadow-2xl animate-[slideIn_0.3s_ease-out] md:max-w-sm"
 >
-  <!-- Header -->
   <div class="flex h-16 items-center justify-between border-b border-neutral-200 px-4">
     <div class="flex items-center gap-3">
       <app-find-pharma-logo class="flex size-9" />
@@ -19,7 +17,6 @@
     </button>
   </div>
 
-  <!-- Menu -->
   <div class="flex flex-col gap-2 p-4">
     @for (item of menuItems; track item.route) {
     <button
@@ -36,7 +33,6 @@
     }
   </div>
 
-  <!-- Bottom Buttons -->
   <div class="mt-auto flex flex-col gap-3 border-t border-neutral-200 p-4">
     <button
       class="flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 text-sm font-medium text-white"
