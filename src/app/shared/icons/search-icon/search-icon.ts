@@ -5,4 +5,4 @@ import { Component } from "@angular/core";
   imports: [],
   templateUrl: "./search-icon.svg",
 })
-export class SearchIcon {}
+export class SearchIconSvg {}

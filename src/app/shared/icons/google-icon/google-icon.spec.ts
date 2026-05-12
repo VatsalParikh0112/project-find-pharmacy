@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { GoogleIcon } from "./google-icon";
+import { GoogleIconSvg } from "./google-icon";
 
-describe("GoogleIcon", () => {
-  let component: GoogleIcon;
-  let fixture: ComponentFixture<GoogleIcon>;
+describe("GoogleIconSvg", () => {
+  let component: GoogleIconSvg;
+  let fixture: ComponentFixture<GoogleIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoogleIcon],
+      imports: [GoogleIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GoogleIcon);
+    fixture = TestBed.createComponent(GoogleIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

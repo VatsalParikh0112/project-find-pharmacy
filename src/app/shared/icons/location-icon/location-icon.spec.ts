@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { LocationIcon } from "./location-icon";
+import { LocationIconSvg } from "./location-icon";
 
-describe("LocationIcon", () => {
-  let component: LocationIcon;
-  let fixture: ComponentFixture<LocationIcon>;
+describe("LocationIconSvg", () => {
+  let component: LocationIconSvg;
+  let fixture: ComponentFixture<LocationIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LocationIcon],
+      imports: [LocationIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LocationIcon);
+    fixture = TestBed.createComponent(LocationIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

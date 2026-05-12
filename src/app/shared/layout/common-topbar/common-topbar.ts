@@ -3,24 +3,31 @@ import { Dialog } from "@angular/cdk/dialog";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { FindPharmaLogo } from "../../Logos/find-pharma-logo/find-pharma-logo";
 import { CommonSidebar } from "../common-sidebar/common-sidebar";
-import { MenuIcon } from "../../icons/menu-icon/menu-icon";
-import { UserIcon } from "../../icons/user-icon/user-icon";
+import { MenuIconSvg } from "../../icons/menu-icon/menu-icon";
+import { UserIconSvg } from "../../icons/user-icon/user-icon";
+import { PatientLoginDialog } from "../../ui/patient-login-dialog/patient-login-dialog";
 
 @Component({
   selector: "app-common-topbar",
-  imports: [FindPharmaLogo, MenuIcon, UserIcon, RouterLink, RouterLinkActive],
+  imports: [FindPharmaLogo, MenuIconSvg, UserIconSvg, RouterLink, RouterLinkActive],
   templateUrl: "./common-topbar.html",
 })
 export class CommonTopbar {
   private readonly dialog = inject(Dialog);
 
-  public openSidebar() {
+  public openSidebar(): void {
     this.dialog.open(CommonSidebar, {
       hasBackdrop: true,
     });
   }
 
-  public scrollToTop() {
+  public openPatientLoginDialog(): void {
+    this.dialog.open(PatientLoginDialog, {
+      panelClass: "custom-auth-dialog",
+    });
+  }
+
+  public scrollToTop(): void {
     window.scrollTo({
       top: 0,
       behavior: "smooth",

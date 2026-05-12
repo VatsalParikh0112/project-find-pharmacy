@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PhoneIcon } from "./phone-icon";
+import { PhoneIconSvg } from "./phone-icon";
 
-describe("PhoneIcon", () => {
-  let component: PhoneIcon;
-  let fixture: ComponentFixture<PhoneIcon>;
+describe("PhoneIconSvg", () => {
+  let component: PhoneIconSvg;
+  let fixture: ComponentFixture<PhoneIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PhoneIcon],
+      imports: [PhoneIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PhoneIcon);
+    fixture = TestBed.createComponent(PhoneIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

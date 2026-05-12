@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UserIcon } from "./user-icon";
+import { UserIconSvg } from "./user-icon";
 
-describe("UserIcon", () => {
-  let component: UserIcon;
-  let fixture: ComponentFixture<UserIcon>;
+describe("UserIconSvg", () => {
+  let component: UserIconSvg;
+  let fixture: ComponentFixture<UserIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserIcon],
+      imports: [UserIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UserIcon);
+    fixture = TestBed.createComponent(UserIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

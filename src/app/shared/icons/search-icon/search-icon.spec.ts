@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SearchIcon } from "./search-icon";
+import { SearchIconSvg } from "./search-icon";
 
-describe("SearchIcon", () => {
-  let component: SearchIcon;
-  let fixture: ComponentFixture<SearchIcon>;
+describe("SearchIconSvg", () => {
+  let component: SearchIconSvg;
+  let fixture: ComponentFixture<SearchIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchIcon],
+      imports: [SearchIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SearchIcon);
+    fixture = TestBed.createComponent(SearchIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

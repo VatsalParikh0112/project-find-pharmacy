@@ -5,4 +5,4 @@ import { Component } from "@angular/core";
   imports: [],
   templateUrl: "./clock-icon.svg",
 })
-export class ClockIcon {}
+export class ClockIconSvg {}

@@ -1,13 +1,13 @@
 import { Component, inject, signal } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import emailjs from "@emailjs/browser";
-import { ClockIcon } from "../../../../shared/icons/clock-icon/clock-icon";
+import { ClockIconSvg } from "../../../../shared/icons/clock-icon/clock-icon";
 import { MailIconSvg } from "../../../../shared/icons/mail-icon/mail-icon";
-import { PhoneIcon } from "../../../../shared/icons/phone-icon/phone-icon";
+import { PhoneIconSvg } from "../../../../shared/icons/phone-icon/phone-icon";
 
 @Component({
   selector: "app-section-2",
-  imports: [ReactiveFormsModule, ClockIcon, MailIconSvg, PhoneIcon],
+  imports: [ReactiveFormsModule, ClockIconSvg, MailIconSvg, PhoneIconSvg],
   templateUrl: "./section-2.html",
 })
 export class Section2 {
@@ -43,15 +43,12 @@ export class Section2 {
 
       this.isSuccess.set(false);
 
+      const { fullName, email, subject, message } = this.contactForm.getRawValue();
+
       await emailjs.send(
         "service_55ztn7k",
         "template_zqv5mna",
-        {
-          full_name: this.contactForm.getRawValue().fullName,
-          user_email: this.contactForm.getRawValue().email,
-          subject: this.contactForm.getRawValue().subject,
-          message: this.contactForm.getRawValue().message,
-        },
+        { full_name: fullName, user_email: email, subject, message },
         "bgyapU45oJpf3qCjK",
       );
 

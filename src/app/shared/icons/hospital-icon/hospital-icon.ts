@@ -5,4 +5,4 @@ import { Component } from "@angular/core";
   imports: [],
   templateUrl: "./hospital-icon.svg",
 })
-export class HospitalIcon {}
+export class HospitalIconSvg {}

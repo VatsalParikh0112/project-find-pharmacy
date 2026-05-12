@@ -1,11 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, OnDestroy, viewChild } from "@angular/core";
-import { HospitalIcon } from "../../../../shared/icons/hospital-icon/hospital-icon";
-import { InjectionIcon } from "../../../../shared/icons/injection-icon/injection-icon";
+import { HospitalIconSvg } from "../../../../shared/icons/hospital-icon/hospital-icon";
+import { InjectionIconSvg } from "../../../../shared/icons/injection-icon/injection-icon";
 import { HandIconSvg } from "../../../../shared/icons/hand-icon/hand-icon";
 
 @Component({
   selector: "app-section-2",
-  imports: [HospitalIcon, InjectionIcon, HandIconSvg],
+  imports: [HospitalIconSvg, InjectionIconSvg, HandIconSvg],
   templateUrl: "./section-2.html",
 })
 export class Section2 implements AfterViewInit, OnDestroy {
@@ -57,8 +57,7 @@ export class Section2 implements AfterViewInit, OnDestroy {
   }
 
   public nextSlide(): void {
-    const total = this.slides.length;
-    this.currentIndex = (this.currentIndex + 1) % total;
+    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
     this.scrollToIndex();
   }
 

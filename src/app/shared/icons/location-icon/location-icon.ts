@@ -5,4 +5,4 @@ import { Component } from "@angular/core";
   imports: [],
   templateUrl: "./location-icon.svg",
 })
-export class LocationIcon {}
+export class LocationIconSvg {}
