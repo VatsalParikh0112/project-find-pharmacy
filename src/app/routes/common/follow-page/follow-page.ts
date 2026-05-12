@@ -6,12 +6,7 @@ import { Section4 } from "./section-4/section-4";
 
 @Component({
   selector: "app-follow-page",
-  imports: [
-    Section1,
-    Section2,
-    Section3,
-    Section4,
-  ],
+  imports: [Section1, Section2, Section3, Section4],
   templateUrl: "./follow-page.html",
 })
 export class FollowPage {}

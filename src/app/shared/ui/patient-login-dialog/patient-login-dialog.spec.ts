@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { InjectionIconSvg } from "./injection-icon";
+import { PatientLoginDialog } from "./patient-login-dialog";
 
-describe("InjectionIconSvg", () => {
-  let component: InjectionIconSvg;
-  let fixture: ComponentFixture<InjectionIconSvg>;
+describe("PatientLoginDialog", () => {
+  let component: PatientLoginDialog;
+  let fixture: ComponentFixture<PatientLoginDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InjectionIconSvg],
+      imports: [PatientLoginDialog],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InjectionIconSvg);
+    fixture = TestBed.createComponent(PatientLoginDialog);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

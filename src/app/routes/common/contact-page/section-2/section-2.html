@@ -80,9 +80,7 @@
 
       @if (errorMessage()) {
       <span class="text-sm text-red-500"> {{ errorMessage() }} </span>
-      }
-
-      @if (isSuccess()) {
+      } @if (isSuccess()) {
       <span class="text-sm text-emerald-600"> Message sent successfully. </span>
       }
 

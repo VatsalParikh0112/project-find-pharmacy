@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CommunityIcon } from "./community-icon";
+import { CommunityIconSvg } from "./community-icon";
 
-describe("CommunityIcon", () => {
-  let component: CommunityIcon;
-  let fixture: ComponentFixture<CommunityIcon>;
+describe("CommunityIconSvg", () => {
+  let component: CommunityIconSvg;
+  let fixture: ComponentFixture<CommunityIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommunityIcon],
+      imports: [CommunityIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CommunityIcon);
+    fixture = TestBed.createComponent(CommunityIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -2,12 +2,11 @@ import { Component, inject } from "@angular/core";
 import { DialogRef } from "@angular/cdk/dialog";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { CloseIconSvg } from "../../icons/close-icon/close-icon";
-import { UserIcon } from "../../icons/user-icon/user-icon";
 import { FindPharmaLogo } from "../../Logos/find-pharma-logo/find-pharma-logo";
 
 @Component({
   selector: "app-common-sidebar",
-  imports: [CloseIconSvg, RouterLink, RouterLinkActive, UserIcon, FindPharmaLogo],
+  imports: [CloseIconSvg, RouterLink, RouterLinkActive, FindPharmaLogo],
   templateUrl: "./common-sidebar.html",
 })
 export class CommonSidebar {

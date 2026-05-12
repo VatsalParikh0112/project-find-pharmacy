@@ -1,0 +1,163 @@
+<div
+  class="relative my-10 w-full overflow-hidden rounded-4xl border border-white/10 bg-emerald-950 text-white shadow-2xl backdrop-blur-2xl lg:max-w-5xl lg:rounded-3xl"
+>
+  <div class="grid lg:grid-cols-2">
+    <div class="relative hidden overflow-hidden bg-emerald-800 p-10 lg:flex">
+      <div class="z-10 flex flex-col justify-between">
+        <div class="flex flex-col gap-6">
+          <span class="w-fit rounded-full bg-white/10 px-4 py-1 text-sm font-medium"> FindMy Pharma </span>
+
+          <div class="flex flex-col gap-4">
+            <span class="text-5xl font-bold leading-tight">
+              Your Health,
+              <span class="text-emerald-300"> Connected Digitally </span>
+            </span>
+
+            <span class="max-w-md text-sm leading-relaxed text-white/70">
+              Search medicines nearby, connect with pharmacies, and manage requests instantly through FindMy Pharma.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md">
+            <span class="text-lg font-semibold"> Verified Pharmacies </span>
+          </div>
+
+          <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md">
+            <span class="text-lg font-semibold"> Real-Time Responses </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute -right-10 -top-10 size-72 rounded-full bg-emerald-400/20 blur-3xl"></div>
+
+      <div class="absolute -bottom-10 -left-10 size-72 rounded-full bg-white/10 blur-3xl"></div>
+    </div>
+
+    <div class="flex flex-col justify-center gap-8 p-6 md:p-10 lg:min-h-0">
+      <div class="flex items-start w-full justify-between gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-3xl font-bold"> {{ isRegisterMode() ? 'Create Account' : 'Welcome Back' }} </span>
+
+          <span class="text-sm text-white/60">
+            {{ isRegisterMode() ? 'Register to continue' : isOtpMode() ? 'Continue with OTP verification' : 'Login to
+            continue' }}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          (click)="closeDialog()"
+          class="flex size-10 cursor-pointer items-center justify-center rounded-full bg-white/5 transition-all duration-300 hover:bg-white/10"
+        >
+          ✕
+        </button>
+      </div>
+
+      <form class="flex flex-col gap-5">
+        @if (isRegisterMode()) {
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Full Name </label>
+
+          <input
+            type="text"
+            placeholder="Enter your full name"
+            class="h-14 rounded-2xl border border-white/10 bg-white/5 px-5 outline-none transition-all duration-300 focus:border-emerald-400"
+          />
+        </div>
+        }
+
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70">
+            {{ isRegisterMode() ? 'Email Address' : 'Email or Phone Number' }}
+          </label>
+
+          <input
+            type="text"
+            placeholder="{{
+              isRegisterMode()
+                ? 'Enter your email address'
+                : 'Enter email or phone number'
+            }}"
+            class="h-14 rounded-2xl border border-white/10 bg-white/5 px-5 outline-none transition-all duration-300 focus:border-emerald-400"
+          />
+        </div>
+
+        @if (isRegisterMode()) {
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Phone Number </label>
+
+          <input
+            type="tel"
+            placeholder="Enter your phone number"
+            class="h-14 rounded-2xl border border-white/10 bg-white/5 px-5 outline-none transition-all duration-300 focus:border-emerald-400"
+          />
+        </div>
+        } @if (!isOtpMode()) {
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Password </label>
+
+          <input
+            type="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            class="h-14 rounded-2xl border border-white/10 bg-white/5 px-5 outline-none transition-all duration-300 focus:border-emerald-400"
+          />
+        </div>
+        } @if (isRegisterMode()) {
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Confirm Password </label>
+          <input
+            type="password"
+            placeholder="Confirm your password"
+            autocomplete="new-password"
+            class="h-14 rounded-2xl border border-white/10 bg-white/5 px-5 outline-none transition-all duration-300 focus:border-emerald-400"
+          />
+        </div>
+        } @if (isOtpMode() && !isRegisterMode()) {
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> OTP </label>
+
+          <input
+            type="text"
+            placeholder="Enter OTP"
+            class="h-14 rounded-2xl border border-white/10 bg-white/5 px-5 tracking-widest outline-none transition-all duration-300 focus:border-emerald-400"
+          />
+        </div>
+        } @if (!isRegisterMode()) {
+        <button
+          type="button"
+          (click)="toggleOtpMode()"
+          class="w-fit cursor-pointer text-sm font-medium text-emerald-300 transition-all duration-300 hover:text-emerald-200"
+        >
+          {{ isOtpMode() ? 'Login with Password' : 'Login with OTP' }}
+        </button>
+        }
+
+        <button
+          type="submit"
+          class="mt-2 flex h-14 cursor-pointer items-center justify-center rounded-2xl bg-emerald-500 font-semibold text-black transition-all duration-300 hover:bg-emerald-400"
+        >
+          {{ isRegisterMode() ? 'Create Patient Account' : isOtpMode() ? 'Verify OTP' : 'Continue' }}
+        </button>
+
+        <div class="flex items-center gap-3">
+          <div class="h-px flex-1 bg-white/10"></div>
+
+          <span class="text-xs text-white/40"> OR </span>
+
+          <div class="h-px flex-1 bg-white/10"></div>
+        </div>
+
+        <button
+          type="button"
+          (click)="toggleMode()"
+          class="h-14 cursor-pointer rounded-2xl border border-white/10 bg-white/5 font-medium transition-all duration-300 hover:bg-white/10"
+        >
+          {{ isRegisterMode() ? 'Already have an account? Login' : 'Create New Account' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

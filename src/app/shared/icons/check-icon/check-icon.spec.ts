@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CheckIcon } from "./check-icon";
+import { CheckIconSvg } from "./check-icon";
 
-describe("CheckIcon", () => {
-  let component: CheckIcon;
-  let fixture: ComponentFixture<CheckIcon>;
+describe("CheckIconSvg", () => {
+  let component: CheckIconSvg;
+  let fixture: ComponentFixture<CheckIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CheckIcon],
+      imports: [CheckIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CheckIcon);
+    fixture = TestBed.createComponent(CheckIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

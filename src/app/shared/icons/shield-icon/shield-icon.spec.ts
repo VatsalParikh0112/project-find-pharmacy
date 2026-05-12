@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ShieldIcon } from "./shield-icon";
+import { ShieldIconSvg } from "./shield-icon";
 
-describe("ShieldIcon", () => {
-  let component: ShieldIcon;
-  let fixture: ComponentFixture<ShieldIcon>;
+describe("ShieldIconSvg", () => {
+  let component: ShieldIconSvg;
+  let fixture: ComponentFixture<ShieldIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShieldIcon],
+      imports: [ShieldIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ShieldIcon);
+    fixture = TestBed.createComponent(ShieldIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

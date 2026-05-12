@@ -5,4 +5,4 @@ import { Component } from "@angular/core";
   imports: [],
   templateUrl: "./shield-icon.svg",
 })
-export class ShieldIcon {}
+export class ShieldIconSvg {}

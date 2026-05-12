@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ClockIcon } from "./clock-icon";
+import { ClockIconSvg } from "./clock-icon";
 
-describe("ClockIcon", () => {
-  let component: ClockIcon;
-  let fixture: ComponentFixture<ClockIcon>;
+describe("ClockIconSvg", () => {
+  let component: ClockIconSvg;
+  let fixture: ComponentFixture<ClockIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClockIcon],
+      imports: [ClockIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ClockIcon);
+    fixture = TestBed.createComponent(ClockIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

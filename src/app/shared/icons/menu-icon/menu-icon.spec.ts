@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MenuIcon } from "./menu-icon";
+import { MenuIconSvg } from "./menu-icon";
 
-describe("MenuIcon", () => {
-  let component: MenuIcon;
-  let fixture: ComponentFixture<MenuIcon>;
+describe("MenuIconSvg", () => {
+  let component: MenuIconSvg;
+  let fixture: ComponentFixture<MenuIconSvg>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MenuIcon],
+      imports: [MenuIconSvg],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MenuIcon);
+    fixture = TestBed.createComponent(MenuIconSvg);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

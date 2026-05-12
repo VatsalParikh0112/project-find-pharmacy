@@ -5,4 +5,4 @@ import { Component } from "@angular/core";
   imports: [],
   templateUrl: "./menu-icon.svg",
 })
-export class MenuIcon {}
+export class MenuIconSvg {}
