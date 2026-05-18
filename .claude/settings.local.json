@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\parik\\\\Desktop\\\\Projects\\\\project-find-pharmacy\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "PowerShell(head -100)",
+      "Bash(xargs grep -l \"http\\\\|fetch\\\\|axios\\\\|service\\\\|api\")"
+    ]
+  }
+}
