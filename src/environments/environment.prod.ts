@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-api-url.onrender.com',
+  apiUrl: 'https://find-pharma-backend-k8zndyog1-vatsal-parikhs-projects.vercel.app',
 };
