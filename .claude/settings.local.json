@@ -5,7 +5,12 @@
       "Bash(Select-Object FullName)",
       "PowerShell(head -100)",
       "Bash(xargs grep -l \"http\\\\|fetch\\\\|axios\\\\|service\\\\|api\")",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(git checkout *)",
+      "Bash(git merge *)",
+      "Bash(git push *)",
+      "Bash(git pull *)",
+      "Bash(gh pr create --title 'fix: broaden CORS to allow all vercel.app origins' --body ' *)"
     ]
   }
 }
