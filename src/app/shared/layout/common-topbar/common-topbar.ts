@@ -5,15 +5,18 @@ import { FindPharmaLogo } from "../../Logos/find-pharma-logo/find-pharma-logo";
 import { CommonSidebar } from "../common-sidebar/common-sidebar";
 import { MenuIconSvg } from "../../icons/menu-icon/menu-icon";
 import { UserIconSvg } from "../../icons/user-icon/user-icon";
+import { LogoutIconSvg } from "../../icons/logout-icon/logout-icon";
 import { PatientLoginDialog } from "../../ui/patient-login-dialog/patient-login-dialog";
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
   selector: "app-common-topbar",
-  imports: [FindPharmaLogo, MenuIconSvg, UserIconSvg, RouterLink, RouterLinkActive],
+  imports: [FindPharmaLogo, MenuIconSvg, UserIconSvg, LogoutIconSvg, RouterLink, RouterLinkActive],
   templateUrl: "./common-topbar.html",
 })
 export class CommonTopbar {
   private readonly dialog = inject(Dialog);
+  public readonly authService = inject(AuthService);
 
   public openSidebar(): void {
     this.dialog.open(CommonSidebar, {
@@ -27,6 +30,10 @@ export class CommonTopbar {
     });
   }
 
+  public logout(): void {
+    this.authService.logout();
+  }
+
   public scrollToTop(): void {
     window.scrollTo({
       top: 0,
@@ -34,10 +41,7 @@ export class CommonTopbar {
     });
   }
 
-  public readonly menuItems: {
-    label: string;
-    route: string;
-  }[] = [
+  public readonly menuItems: { label: string; route: string }[] = [
     { label: "Home", route: "home" },
     { label: "About Us", route: "about" },
     { label: "Contact Us", route: "contact" },

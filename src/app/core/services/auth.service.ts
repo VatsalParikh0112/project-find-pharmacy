@@ -4,7 +4,15 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
 
 import { environment } from "../../../environments/environment";
-import { AuthResponse, AuthUser, LoginRequest, RegisterRequest } from "../models/auth.models";
+import {
+  AuthResponse,
+  AuthUser,
+  LoginRequest,
+  MessageResponse,
+  RegisterRequest,
+  SendRegistrationOtpRequest,
+  VerifyOtpRequest,
+} from "../models/auth.models";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -27,9 +35,23 @@ export class AuthService {
       .pipe(tap((res) => this.persistSession(res)));
   }
 
+  public sendRegistrationOtp(payload: SendRegistrationOtpRequest): Observable<MessageResponse> {
+    return this.http.post<MessageResponse>(`${this.baseUrl}/send-registration-otp`, payload);
+  }
+
   public register(payload: RegisterRequest): Observable<AuthResponse> {
     return this.http
       .post<AuthResponse>(`${this.baseUrl}/register`, payload)
+      .pipe(tap((res) => this.persistSession(res)));
+  }
+
+  public sendOtp(email: string): Observable<MessageResponse> {
+    return this.http.post<MessageResponse>(`${this.baseUrl}/send-otp`, { email });
+  }
+
+  public verifyOtp(payload: VerifyOtpRequest): Observable<AuthResponse> {
+    return this.http
+      .post<AuthResponse>(`${this.baseUrl}/verify-otp`, payload)
       .pipe(tap((res) => this.persistSession(res)));
   }
 
