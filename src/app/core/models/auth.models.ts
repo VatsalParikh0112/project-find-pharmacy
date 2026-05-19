@@ -8,6 +8,33 @@ export interface RegisterRequest {
   email: string;
   password: string;
   phone?: string;
+  emailOtp: string;
+  phoneOtp?: string;
+}
+
+export interface SendRegistrationOtpRequest {
+  email: string;
+  phone?: string;
+}
+
+export interface SendRegistrationOtpResponse {
+  success: boolean;
+  message: string;
+  phoneSent: boolean;
+}
+
+export interface SendLoginOtpRequest {
+  email: string;
+}
+
+export interface SendLoginOtpResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface VerifyLoginOtpRequest {
+  email: string;
+  otp: string;
 }
 
 export interface AuthUser {

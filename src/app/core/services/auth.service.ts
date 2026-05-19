@@ -4,7 +4,17 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
 
 import { environment } from "../../../environments/environment";
-import { AuthResponse, AuthUser, LoginRequest, RegisterRequest } from "../models/auth.models";
+import {
+  AuthResponse,
+  AuthUser,
+  LoginRequest,
+  RegisterRequest,
+  SendLoginOtpRequest,
+  SendLoginOtpResponse,
+  SendRegistrationOtpRequest,
+  SendRegistrationOtpResponse,
+  VerifyLoginOtpRequest,
+} from "../models/auth.models";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -31,6 +41,25 @@ export class AuthService {
     return this.http
       .post<AuthResponse>(`${this.baseUrl}/register`, payload)
       .pipe(tap((res) => this.persistSession(res)));
+  }
+
+  public sendLoginOtp(payload: SendLoginOtpRequest): Observable<SendLoginOtpResponse> {
+    return this.http.post<SendLoginOtpResponse>(`${this.baseUrl}/send-otp`, payload);
+  }
+
+  public verifyLoginOtp(payload: VerifyLoginOtpRequest): Observable<AuthResponse> {
+    return this.http
+      .post<AuthResponse>(`${this.baseUrl}/verify-otp`, payload)
+      .pipe(tap((res) => this.persistSession(res)));
+  }
+
+  public sendRegistrationOtp(
+    payload: SendRegistrationOtpRequest,
+  ): Observable<SendRegistrationOtpResponse> {
+    return this.http.post<SendRegistrationOtpResponse>(
+      `${this.baseUrl}/send-registration-otp`,
+      payload,
+    );
   }
 
   public logout(): void {

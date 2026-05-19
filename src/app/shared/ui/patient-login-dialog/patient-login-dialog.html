@@ -1,302 +1,559 @@
 <div
-  class="relative my-10 w-full overflow-hidden rounded-4xl border border-white/10 bg-emerald-950 text-white shadow-2xl backdrop-blur-2xl lg:max-w-5xl lg:rounded-3xl"
+  class="relative mx-auto my-4 w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-emerald-950 text-white shadow-2xl backdrop-blur-2xl md:my-6 lg:rounded-3xl"
 >
   <div class="grid lg:grid-cols-2">
-    <div class="relative hidden overflow-hidden bg-emerald-800 p-10 lg:flex">
-      <div class="z-10 flex flex-col justify-between">
+    <!-- LEFT PANEL -->
+    <div class="relative hidden overflow-hidden bg-emerald-800 p-8 lg:flex xl:p-10">
+      <div class="z-10 flex flex-col justify-between gap-10">
         <div class="flex flex-col gap-6">
-          <span class="w-fit rounded-full bg-white/10 px-4 py-1 text-sm font-medium"> FindMy Pharma </span>
+          <span class="w-fit rounded-full bg-white/10 px-4 py-1 text-sm font-medium">
+            FindMy Pharma
+          </span>
 
           <div class="flex flex-col gap-4">
-            <span class="text-5xl font-bold leading-tight">
+            <span class="text-4xl font-bold leading-tight xl:text-5xl">
               Your Health,
               <span class="text-emerald-300"> Connected Digitally </span>
             </span>
 
             <span class="max-w-md text-sm leading-relaxed text-white/70">
-              Search medicines nearby, connect with pharmacies, and manage requests instantly through FindMy Pharma.
+              Search medicines nearby, connect with pharmacies, and manage
+              requests instantly through FindMy Pharma.
             </span>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
-          <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md">
-            <span class="text-lg font-semibold"> Verified Pharmacies </span>
+          <div
+            class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md"
+          >
+            <span class="text-base font-semibold">
+              Verified Pharmacies
+            </span>
           </div>
 
-          <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md">
-            <span class="text-lg font-semibold"> Real-Time Responses </span>
+          <div
+            class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md"
+          >
+            <span class="text-base font-semibold">
+              Real-Time Responses
+            </span>
           </div>
         </div>
       </div>
 
-      <div class="absolute -right-10 -top-10 size-72 rounded-full bg-emerald-400/20 blur-3xl"></div>
-      <div class="absolute -bottom-10 -left-10 size-72 rounded-full bg-white/10 blur-3xl"></div>
+      <div
+        class="absolute -right-10 -top-10 size-72 rounded-full bg-emerald-400/20 blur-3xl"
+      ></div>
+
+      <div
+        class="absolute -bottom-10 -left-10 size-72 rounded-full bg-white/10 blur-3xl"
+      ></div>
     </div>
 
-    <div class="flex flex-col justify-center gap-8 p-6 md:p-10 lg:min-h-0">
-      <div class="flex w-full items-start justify-between gap-4">
-        <div class="flex flex-col gap-1">
-          <span class="text-3xl font-bold">
-            {{ isRegisterMode() ? 'Create Account' : 'Welcome Back' }}
-          </span>
+    <!-- RIGHT PANEL -->
+    <div
+      class="flex min-w-0 flex-col justify-center gap-6 p-4 md:p-8 lg:p-10"
+    >
+      <!-- HEADER -->
+<div class="relative pr-12">
+  <div class="flex min-w-0 flex-col gap-1">
+    <span
+      class="wrap-break-word text-2xl font-bold leading-tight md:text-3xl"
+    >
+      {{ isRegisterMode() ? 'Create Account' : 'Welcome Back' }}
+    </span>
 
-          <span class="text-sm text-white/60">
-            {{ isRegisterMode() ? 'Register to continue' : isOtpMode() ? 'Continue with OTP verification' : 'Login to continue' }}
-          </span>
+    <span class="text-sm leading-relaxed text-white/60">
+      {{
+        isRegisterMode()
+          ? 'Register to continue'
+          : isOtpMode()
+          ? 'Continue with OTP verification'
+          : 'Login to continue'
+      }}
+    </span>
+  </div>
+
+  <!-- CLOSE BUTTON -->
+  <button
+    type="button"
+    (click)="closeDialog()"
+    class="absolute right-0 top-0 flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm text-white/70 backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:text-white"
+  >
+    ✕
+  </button>
+</div>
+
+      @if (serverError()) {
+      <div
+        class="wrap-break-word rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300"
+      >
+        {{ serverError() }}
+      </div>
+      }
+
+      <!-- LOGIN -->
+      @if (!isRegisterMode()) {
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col gap-5"
+      >
+        <!-- PASSWORD MODE -->
+        @if (!isOtpMode()) {
+
+        <!-- EMAIL -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Email Address </label>
+          <input
+            formControlName="email"
+            type="text"
+            placeholder="Enter your email address"
+            class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
+            [class]="loginEmail.touched && loginEmail.invalid ? 'border-red-500/50' : 'border-white/10'"
+          />
+          @if (loginEmail.touched && loginEmail.hasError('required')) {
+            <span class="text-xs text-red-400"> Email is required </span>
+          } @else if (loginEmail.touched && loginEmail.hasError('email')) {
+            <span class="text-xs text-red-400"> Please enter a valid email </span>
+          }
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Password </label>
+          <div class="relative">
+            <input
+              formControlName="password"
+              [type]="isPasswordVisible() ? 'text' : 'password'"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              class="h-13 w-full rounded-2xl border bg-white/5 px-4 pr-16 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5 md:pr-16"
+              [class]="loginPassword.touched && loginPassword.invalid ? 'border-red-500/50' : 'border-white/10'"
+            />
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
+            >
+              {{ isPasswordVisible() ? 'Hide' : 'Show' }}
+            </button>
+          </div>
+          @if (loginPassword.touched && loginPassword.hasError('required')) {
+            <span class="text-xs text-red-400"> Password is required </span>
+          } @else if (loginPassword.touched && loginPassword.hasError('minlength')) {
+            <span class="text-xs text-red-400"> Password must be at least 6 characters </span>
+          }
+        </div>
+
+        }
+
+        <!-- OTP MODE -->
+        @if (isOtpMode()) {
+
+        <!-- EMAIL + SEND OTP -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Email Address </label>
+          <div class="flex gap-2">
+            <input
+              formControlName="email"
+              type="text"
+              placeholder="Enter your email address"
+              class="h-13 min-w-0 flex-1 rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
+              [class]="loginEmail.touched && loginEmail.invalid ? 'border-red-500/50' : 'border-white/10'"
+            />
+            <button
+              type="button"
+              (click)="sendLoginOtp()"
+              [disabled]="loginOtpLoading() || loginOtpSent()"
+              class="h-13 shrink-0 rounded-2xl px-4 text-sm font-semibold transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60 md:h-14"
+              [class]="loginOtpSent() ? 'border border-emerald-500/30 bg-emerald-500/20 text-emerald-300' : 'bg-emerald-500 text-black hover:bg-emerald-400'"
+            >
+              @if (loginOtpLoading()) {
+                <span class="inline-block size-4 animate-spin rounded-full border-2 border-black/30 border-t-black"></span>
+              } @else if (loginOtpSent()) {
+                Sent ✓
+              } @else {
+                Send OTP
+              }
+            </button>
+          </div>
+          @if (loginEmail.touched && loginEmail.hasError('required')) {
+            <span class="text-xs text-red-400"> Email is required </span>
+          } @else if (loginEmail.touched && loginEmail.hasError('email')) {
+            <span class="text-xs text-red-400"> Please enter a valid email </span>
+          }
+        </div>
+
+        <!-- OTP INPUT (shown after send) -->
+        @if (loginOtpSent()) {
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> OTP </label>
+          <input
+            formControlName="otp"
+            type="text"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="Enter 6-digit OTP"
+            class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-center text-sm tracking-[0.25em] outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
+            [class]="loginOtp.touched && loginOtp.invalid ? 'border-red-500/50' : 'border-white/10'"
+          />
+          @if (loginOtp.touched && loginOtp.hasError('pattern')) {
+            <span class="text-xs text-red-400"> Please enter a valid 6-digit OTP </span>
+          }
+          <button
+            type="button"
+            (click)="sendLoginOtp()"
+            [disabled]="loginOtpLoading()"
+            class="w-fit text-xs font-medium text-white/40 transition-colors hover:text-white/70 disabled:cursor-not-allowed"
+          >
+            Resend OTP
+          </button>
+        </div>
+        }
+
+        }
+
+        <button
+          type="button"
+          (click)="toggleOtpMode()"
+          class="w-fit cursor-pointer text-left text-sm font-medium text-emerald-300 transition-all duration-300 hover:text-emerald-200"
+        >
+          {{ isOtpMode() ? 'Login with Password' : 'Login with OTP' }}
+        </button>
+
+        <!-- SUBMIT -->
+        <button
+          type="submit"
+          [disabled]="isLoading() || (isOtpMode() && !loginOtpSent())"
+          class="mt-2 flex h-13 w-full cursor-pointer items-center justify-center rounded-2xl bg-emerald-500 px-4 text-sm font-semibold text-black transition-all duration-300 hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60 md:h-14 md:text-base"
+        >
+          @if (isLoading()) {
+          <span
+            class="size-5 animate-spin rounded-full border-2 border-black/30 border-t-black"
+          ></span>
+          } @else {
+          {{ isOtpMode() ? 'Verify OTP' : 'Continue' }}
+          }
+        </button>
+
+        <div class="flex items-center gap-3">
+          <div class="h-px flex-1 bg-white/10"></div>
+          <span class="text-xs text-white/40"> OR </span>
+          <div class="h-px flex-1 bg-white/10"></div>
         </div>
 
         <button
           type="button"
-          (click)="closeDialog()"
-          class="flex size-10 cursor-pointer items-center justify-center rounded-full bg-white/5 transition-all duration-300 hover:bg-white/10"
+          (click)="toggleMode()"
+          class="h-13 w-full cursor-pointer rounded-2xl border border-white/10 bg-white/5 px-4 text-sm font-medium transition-all duration-300 hover:bg-white/10 md:h-14 md:text-base"
         >
-          ✕
+          Create New Account
         </button>
-      </div>
-
-      @if (serverError()) {
-        <div class="rounded-2xl border border-red-500/30 bg-red-500/10 px-5 py-3 text-sm text-red-300">
-          {{ serverError() }}
-        </div>
+      </form>
       }
 
-      @if (!isRegisterMode()) {
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-5">
-          <div class="flex flex-col gap-2">
-            <label class="text-sm text-white/70"> Email Address </label>
-
-            <input
-              formControlName="email"
-              type="text"
-              placeholder="Enter your email address"
-              class="h-14 rounded-2xl border bg-white/5 px-5 outline-none transition-all duration-300 focus:border-emerald-400"
-              [class]="loginEmail.touched && loginEmail.invalid ? 'border-red-500/50' : 'border-white/10'"
-            />
-
-            @if (loginEmail.touched && loginEmail.hasError('required')) {
-              <span class="text-xs text-red-400"> Email is required </span>
-            } @else if (loginEmail.touched && loginEmail.hasError('email')) {
-              <span class="text-xs text-red-400"> Please enter a valid email </span>
-            }
-          </div>
-
-          @if (!isOtpMode()) {
-            <div class="flex flex-col gap-2">
-              <label class="text-sm text-white/70"> Password </label>
-
-              <div class="relative">
-                <input
-                  formControlName="password"
-                  [type]="isPasswordVisible() ? 'text' : 'password'"
-                  placeholder="Enter your password"
-                  autocomplete="current-password"
-                  class="h-14 w-full rounded-2xl border bg-white/5 px-5 pr-14 outline-none transition-all duration-300 focus:border-emerald-400"
-                  [class]="loginPassword.touched && loginPassword.invalid ? 'border-red-500/50' : 'border-white/10'"
-                />
-
-                <button
-                  type="button"
-                  (click)="togglePasswordVisibility()"
-                  class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
-                >
-                  {{ isPasswordVisible() ? 'Hide' : 'Show' }}
-                </button>
-              </div>
-
-              @if (loginPassword.touched && loginPassword.hasError('required')) {
-                <span class="text-xs text-red-400"> Password is required </span>
-              } @else if (loginPassword.touched && loginPassword.hasError('minlength')) {
-                <span class="text-xs text-red-400"> Password must be at least 6 characters </span>
-              }
-            </div>
-          }
-
-          @if (isOtpMode()) {
-            <div class="flex flex-col gap-2">
-              <label class="text-sm text-white/70"> OTP </label>
-
-              <input
-                type="text"
-                placeholder="Enter OTP"
-                class="h-14 rounded-2xl border border-white/10 bg-white/5 px-5 tracking-widest outline-none transition-all duration-300 focus:border-emerald-400"
-              />
-            </div>
-          }
-
-          <button
-            type="button"
-            (click)="toggleOtpMode()"
-            class="w-fit cursor-pointer text-sm font-medium text-emerald-300 transition-all duration-300 hover:text-emerald-200"
-          >
-            {{ isOtpMode() ? 'Login with Password' : 'Login with OTP' }}
-          </button>
-
-          <button
-            type="submit"
-            [disabled]="isLoading()"
-            class="mt-2 flex h-14 cursor-pointer items-center justify-center rounded-2xl bg-emerald-500 font-semibold text-black transition-all duration-300 hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            @if (isLoading()) {
-              <span class="size-5 animate-spin rounded-full border-2 border-black/30 border-t-black"></span>
-            } @else {
-              {{ isOtpMode() ? 'Verify OTP' : 'Continue' }}
-            }
-          </button>
-
-          <div class="flex items-center gap-3">
-            <div class="h-px flex-1 bg-white/10"></div>
-            <span class="text-xs text-white/40"> OR </span>
-            <div class="h-px flex-1 bg-white/10"></div>
-          </div>
-
-          <button
-            type="button"
-            (click)="toggleMode()"
-            class="h-14 cursor-pointer rounded-2xl border border-white/10 bg-white/5 font-medium transition-all duration-300 hover:bg-white/10"
-          >
-            Create New Account
-          </button>
-        </form>
-      }
-
+      <!-- REGISTER -->
       @if (isRegisterMode()) {
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-5">
-          <div class="flex flex-col gap-2">
-            <label class="text-sm text-white/70"> Full Name </label>
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col gap-5"
+      >
+        @if (!otpSent()) {
 
-            <input
-              formControlName="name"
-              type="text"
-              placeholder="Enter your full name"
-              class="h-14 rounded-2xl border bg-white/5 px-5 outline-none transition-all duration-300 focus:border-emerald-400"
-              [class]="regName.touched && regName.invalid ? 'border-red-500/50' : 'border-white/10'"
-            />
+        <!-- NAME -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Full Name </label>
 
-            @if (regName.touched && regName.hasError('required')) {
-              <span class="text-xs text-red-400"> Full name is required </span>
-            } @else if (regName.touched && regName.hasError('maxlength')) {
-              <span class="text-xs text-red-400"> Name cannot exceed 50 characters </span>
-            }
-          </div>
+          <input
+            formControlName="name"
+            type="text"
+            placeholder="Enter your full name"
+            class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
+            [class]="regName.touched && regName.invalid ? 'border-red-500/50' : 'border-white/10'"
+          />
 
-          <div class="flex flex-col gap-2">
-            <label class="text-sm text-white/70"> Email Address </label>
+          @if (regName.touched && regName.hasError('required')) {
+          <span class="text-xs text-red-400">
+            Full name is required
+          </span>
+          } @else if (regName.touched &&
+          regName.hasError('maxlength')) {
+          <span class="text-xs text-red-400">
+            Name cannot exceed 50 characters
+          </span>
+          }
+        </div>
 
-            <input
-              formControlName="email"
-              type="text"
-              placeholder="Enter your email address"
-              class="h-14 rounded-2xl border bg-white/5 px-5 outline-none transition-all duration-300 focus:border-emerald-400"
-              [class]="regEmail.touched && regEmail.invalid ? 'border-red-500/50' : 'border-white/10'"
-            />
+        <!-- EMAIL -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Email Address </label>
 
-            @if (regEmail.touched && regEmail.hasError('required')) {
-              <span class="text-xs text-red-400"> Email is required </span>
-            } @else if (regEmail.touched && regEmail.hasError('email')) {
-              <span class="text-xs text-red-400"> Please enter a valid email </span>
-            }
-          </div>
+          <input
+            formControlName="email"
+            type="text"
+            placeholder="Enter your email address"
+            class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
+            [class]="regEmail.touched && regEmail.invalid ? 'border-red-500/50' : 'border-white/10'"
+          />
 
-          <div class="flex flex-col gap-2">
-            <label class="text-sm text-white/70"> Phone Number </label>
+          @if (regEmail.touched && regEmail.hasError('required')) {
+          <span class="text-xs text-red-400"> Email is required </span>
+          } @else if (regEmail.touched &&
+          regEmail.hasError('email')) {
+          <span class="text-xs text-red-400">
+            Please enter a valid email
+          </span>
+          }
+        </div>
+
+        <!-- PHONE -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Phone Number </label>
+
+          <div class="flex min-w-0 gap-2">
+            <select
+              (change)="onCountryChange($event)"
+              class="h-13 w-22 shrink-0 cursor-pointer rounded-2xl border border-white/10 bg-white/5 px-2 text-xs outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:w-25 md:px-3 md:text-sm"
+            >
+              @for (country of countryCodes; track country.dial +
+              country.name) {
+              <option
+                [value]="country.dial"
+                class="bg-emerald-950 text-white"
+              >
+                {{ country.flag }} {{ country.dial }}
+              </option>
+              }
+            </select>
 
             <input
               formControlName="phone"
               type="tel"
-              placeholder="Enter your 10-digit phone number"
-              class="h-14 rounded-2xl border bg-white/5 px-5 outline-none transition-all duration-300 focus:border-emerald-400"
+              placeholder="Phone number"
+              class="h-13 min-w-0 flex-1 rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
               [class]="regPhone.touched && regPhone.invalid ? 'border-red-500/50' : 'border-white/10'"
             />
-
-            @if (regPhone.touched && regPhone.hasError('pattern')) {
-              <span class="text-xs text-red-400"> Please enter a valid 10-digit phone number </span>
-            }
           </div>
 
-          <div class="flex flex-col gap-2">
-            <label class="text-sm text-white/70"> Password </label>
+          @if (regPhone.touched && regPhone.hasError('pattern')) {
+          <span class="text-xs text-red-400">
+            Please enter a valid phone number
+          </span>
+          }
+        </div>
 
-            <div class="relative">
-              <input
-                formControlName="password"
-                [type]="isPasswordVisible() ? 'text' : 'password'"
-                placeholder="Enter your password"
-                class="h-14 w-full rounded-2xl border bg-white/5 px-5 pr-14 outline-none transition-all duration-300 focus:border-emerald-400"
-                [class]="regPassword.touched && regPassword.invalid ? 'border-red-500/50' : 'border-white/10'"
-              />
+        <!-- PASSWORD -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Password </label>
 
-              <button
-                type="button"
-                (click)="togglePasswordVisibility()"
-                class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
-              >
-                {{ isPasswordVisible() ? 'Hide' : 'Show' }}
-              </button>
-            </div>
+          <div class="relative">
+            <input
+              formControlName="password"
+              [type]="isPasswordVisible() ? 'text' : 'password'"
+              placeholder="Enter your password"
+              class="h-13 w-full rounded-2xl border bg-white/5 px-4 pr-16 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5 md:pr-16"
+              [class]="regPassword.touched && regPassword.invalid ? 'border-red-500/50' : 'border-white/10'"
+            />
 
-            @if (regPassword.touched && regPassword.hasError('required')) {
-              <span class="text-xs text-red-400"> Password is required </span>
-            } @else if (regPassword.touched && regPassword.hasError('minlength')) {
-              <span class="text-xs text-red-400"> Password must be at least 6 characters </span>
-            }
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
+            >
+              {{ isPasswordVisible() ? 'Hide' : 'Show' }}
+            </button>
           </div>
 
-          <div class="flex flex-col gap-2">
-            <label class="text-sm text-white/70"> Confirm Password </label>
+          @if (regPassword.touched &&
+          regPassword.hasError('required')) {
+          <span class="text-xs text-red-400">
+            Password is required
+          </span>
+          } @else if (regPassword.touched &&
+          regPassword.hasError('minlength')) {
+          <span class="text-xs text-red-400">
+            Password must be at least 6 characters
+          </span>
+          }
+        </div>
 
-            <div class="relative">
-              <input
-                formControlName="confirmPassword"
-                [type]="isConfirmPasswordVisible() ? 'text' : 'password'"
-                placeholder="Confirm your password"
-                autocomplete="new-password"
-                class="h-14 w-full rounded-2xl border bg-white/5 px-5 pr-14 outline-none transition-all duration-300 focus:border-emerald-400"
-                [class]="(regConfirmPassword.touched && regConfirmPassword.invalid) || passwordMismatch ? 'border-red-500/50' : 'border-white/10'"
-              />
+        <!-- CONFIRM PASSWORD -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70">
+            Confirm Password
+          </label>
 
-              <button
-                type="button"
-                (click)="toggleConfirmPasswordVisibility()"
-                class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
-              >
-                {{ isConfirmPasswordVisible() ? 'Hide' : 'Show' }}
-              </button>
-            </div>
+          <div class="relative">
+            <input
+              formControlName="confirmPassword"
+              [type]="isConfirmPasswordVisible() ? 'text' : 'password'"
+              placeholder="Confirm your password"
+              autocomplete="new-password"
+              class="h-13 w-full rounded-2xl border bg-white/5 px-4 pr-16 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5 md:pr-16"
+              [class]="(regConfirmPassword.touched && regConfirmPassword.invalid) || passwordMismatch ? 'border-red-500/50' : 'border-white/10'"
+            />
 
-            @if (regConfirmPassword.touched && regConfirmPassword.hasError('required')) {
-              <span class="text-xs text-red-400"> Please confirm your password </span>
-            } @else if (passwordMismatch) {
-              <span class="text-xs text-red-400"> Passwords do not match </span>
-            }
+            <button
+              type="button"
+              (click)="toggleConfirmPasswordVisibility()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
+            >
+              {{ isConfirmPasswordVisible() ? 'Hide' : 'Show' }}
+            </button>
           </div>
 
-          <button
-            type="submit"
-            [disabled]="isLoading()"
-            class="mt-2 flex h-14 cursor-pointer items-center justify-center rounded-2xl bg-emerald-500 font-semibold text-black transition-all duration-300 hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            @if (isLoading()) {
-              <span class="size-5 animate-spin rounded-full border-2 border-black/30 border-t-black"></span>
-            } @else {
-              Create Patient Account
-            }
-          </button>
+          @if (regConfirmPassword.touched &&
+          regConfirmPassword.hasError('required')) {
+          <span class="text-xs text-red-400">
+            Please confirm your password
+          </span>
+          } @else if (passwordMismatch) {
+          <span class="text-xs text-red-400">
+            Passwords do not match
+          </span>
+          }
+        </div>
 
-          <div class="flex items-center gap-3">
-            <div class="h-px flex-1 bg-white/10"></div>
-            <span class="text-xs text-white/40"> OR </span>
-            <div class="h-px flex-1 bg-white/10"></div>
-          </div>
+        <!-- CREATE ACCOUNT -->
+        <button
+          type="submit"
+          [disabled]="isLoading()"
+          class="mt-2 flex h-13 w-full cursor-pointer items-center justify-center rounded-2xl bg-emerald-500 px-4 text-sm font-semibold text-black transition-all duration-300 hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60 md:h-14 md:text-base"
+        >
+          @if (isLoading()) {
+          <span
+            class="size-5 animate-spin rounded-full border-2 border-black/30 border-t-black"
+          ></span>
+          } @else {
+          Create Patient Account
+          }
+        </button>
 
+        <div class="flex items-center gap-3">
+          <div class="h-px flex-1 bg-white/10"></div>
+          <span class="text-xs text-white/40"> OR </span>
+          <div class="h-px flex-1 bg-white/10"></div>
+        </div>
+
+        <button
+          type="button"
+          (click)="toggleMode()"
+          class="h-13 w-full cursor-pointer rounded-2xl border border-white/10 bg-white/5 px-4 text-sm font-medium transition-all duration-300 hover:bg-white/10 md:h-14 md:text-base"
+        >
+          Already have an account? Login
+        </button>
+
+        } @else {
+
+        <!-- OTP SUCCESS -->
+        <div
+          class="wrap-break-word rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-4 text-sm leading-relaxed text-emerald-300"
+        >
+          OTPs sent to
+          <span class="font-semibold">{{ regEmail.value }}</span>
+
+          @if (regPhone.value) {
+          and
+          <span class="font-semibold">{{ fullPhone }}</span>
+          }
+        </div>
+
+        <!-- EMAIL OTP -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Email OTP </label>
+
+          <input
+            formControlName="emailOtp"
+            type="text"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="Enter 6-digit OTP"
+            class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-center text-sm tracking-[0.25em] outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
+            [class]="regEmailOtp.touched && regEmailOtp.invalid ? 'border-red-500/50' : 'border-white/10'"
+          />
+
+          @if (regEmailOtp.touched &&
+          regEmailOtp.hasError('required')) {
+          <span class="text-xs text-red-400">
+            Email OTP is required
+          </span>
+          } @else if (regEmailOtp.touched &&
+          regEmailOtp.hasError('pattern')) {
+          <span class="text-xs text-red-400">
+            Please enter a valid 6-digit OTP
+          </span>
+          }
+        </div>
+
+        <!-- PHONE OTP -->
+        @if (regPhone.value) {
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Phone OTP </label>
+
+          <input
+            formControlName="phoneOtp"
+            type="text"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="Enter 6-digit OTP"
+            class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-center text-sm tracking-[0.25em] outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
+            [class]="regPhoneOtp.touched && regPhoneOtp.invalid ? 'border-red-500/50' : 'border-white/10'"
+          />
+
+          @if (regPhoneOtp.touched &&
+          regPhoneOtp.hasError('pattern')) {
+          <span class="text-xs text-red-400">
+            Please enter a valid 6-digit OTP
+          </span>
+          }
+        </div>
+        }
+
+        <!-- VERIFY -->
+        <button
+          type="submit"
+          [disabled]="isLoading()"
+          class="mt-2 flex h-13 w-full cursor-pointer items-center justify-center rounded-2xl bg-emerald-500 px-4 text-sm font-semibold text-black transition-all duration-300 hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60 md:h-14 md:text-base"
+        >
+          @if (isLoading()) {
+          <span
+            class="size-5 animate-spin rounded-full border-2 border-black/30 border-t-black"
+          ></span>
+          } @else {
+          Verify & Create Account
+          }
+        </button>
+
+        <div class="flex items-center justify-between">
+          <!-- BACK -->
           <button
             type="button"
-            (click)="toggleMode()"
-            class="h-14 cursor-pointer rounded-2xl border border-white/10 bg-white/5 font-medium transition-all duration-300 hover:bg-white/10"
+            (click)="backToForm()"
+            class="text-sm text-white/40 transition-colors hover:text-white/70"
           >
-            Already have an account? Login
+            ← Edit details
           </button>
-        </form>
+
+          <!-- RESEND -->
+          <button
+            type="button"
+            (click)="resendOtps()"
+            [disabled]="otpResending()"
+            class="text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            @if (otpResending()) {
+              Sending...
+            } @else {
+              Resend OTPs
+            }
+          </button>
+        </div>
+
+        }
+      </form>
       }
     </div>
   </div>
