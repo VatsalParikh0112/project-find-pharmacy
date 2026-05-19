@@ -1,5 +1,6 @@
 export interface LoginRequest {
-  email: string;
+  email?: string;
+  phone?: string;
   password: string;
 }
 
@@ -24,7 +25,8 @@ export interface SendRegistrationOtpResponse {
 }
 
 export interface SendLoginOtpRequest {
-  email: string;
+  email?: string;
+  phone?: string;
 }
 
 export interface SendLoginOtpResponse {
@@ -33,7 +35,8 @@ export interface SendLoginOtpResponse {
 }
 
 export interface VerifyLoginOtpRequest {
-  email: string;
+  email?: string;
+  phone?: string;
   otp: string;
 }
 

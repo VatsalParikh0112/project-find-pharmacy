@@ -6,6 +6,7 @@ import { CommonSidebar } from "../common-sidebar/common-sidebar";
 import { MenuIconSvg } from "../../icons/menu-icon/menu-icon";
 import { UserIconSvg } from "../../icons/user-icon/user-icon";
 import { PatientLoginDialog } from "../../ui/patient-login-dialog/patient-login-dialog";
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
   selector: "app-common-topbar",
@@ -14,6 +15,7 @@ import { PatientLoginDialog } from "../../ui/patient-login-dialog/patient-login-
 })
 export class CommonTopbar {
   private readonly dialog = inject(Dialog);
+  public readonly authService = inject(AuthService);
 
   public openSidebar(): void {
     this.dialog.open(CommonSidebar, {
@@ -25,6 +27,10 @@ export class CommonTopbar {
     this.dialog.open(PatientLoginDialog, {
       panelClass: "custom-auth-dialog",
     });
+  }
+
+  public logout(): void {
+    this.authService.logout();
   }
 
   public scrollToTop(): void {

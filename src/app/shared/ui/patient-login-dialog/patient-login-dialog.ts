@@ -75,6 +75,8 @@ export class PatientLoginDialog {
   public readonly otpResending = signal(false);
   public readonly loginOtpSent = signal(false);
   public readonly loginOtpLoading = signal(false);
+  public readonly loginMethod = signal<"email" | "phone">("email");
+  public readonly loginCountryCode = signal<CountryCode>(COUNTRY_CODES[0]);
   public readonly selectedCountryCode = signal<CountryCode>(COUNTRY_CODES[0]);
   private otpSentToEmail = "";
   private otpSentToPhone = "";
@@ -82,8 +84,9 @@ export class PatientLoginDialog {
   public readonly countryCodes = COUNTRY_CODES;
 
   public readonly loginForm = this.fb.group({
-    email: ["", [Validators.required, Validators.email]],
-    password: ["", [Validators.required, Validators.minLength(6)]],
+    email: ["", [Validators.email]],
+    phone: ["", [Validators.pattern(/^[0-9]{4,14}$/)]],
+    password: ["", [Validators.minLength(6)]],
     otp: ["", [Validators.pattern(/^\d{6}$/)]],
   });
 
@@ -103,11 +106,32 @@ export class PatientLoginDialog {
   public get loginEmail() {
     return this.loginForm.get("email")!;
   }
+  public get loginPhone() {
+    return this.loginForm.get("phone")!;
+  }
   public get loginPassword() {
     return this.loginForm.get("password")!;
   }
   public get loginOtp() {
     return this.loginForm.get("otp")!;
+  }
+  public get loginFullPhone(): string {
+    return this.loginPhone.value
+      ? `${this.loginCountryCode().dial}${this.loginPhone.value}`
+      : "";
+  }
+
+  public setLoginMethod(method: "email" | "phone"): void {
+    this.loginMethod.set(method);
+    this.loginOtpSent.set(false);
+    this.loginOtp.reset();
+    this.serverError.set(null);
+  }
+
+  public onLoginCountryChange(event: Event): void {
+    const dial = (event.target as HTMLSelectElement).value;
+    const country = this.countryCodes.find((c) => c.dial === dial) ?? COUNTRY_CODES[0];
+    this.loginCountryCode.set(country);
   }
   public get regName() {
     return this.registerForm.get("name")!;
@@ -155,6 +179,8 @@ export class PatientLoginDialog {
     this.isOtpMode.set(false);
     this.otpSent.set(false);
     this.loginOtpSent.set(false);
+    this.loginMethod.set("email");
+    this.loginCountryCode.set(COUNTRY_CODES[0]);
     this.serverError.set(null);
     this.selectedCountryCode.set(COUNTRY_CODES[0]);
     this.otpSentToEmail = "";
@@ -171,15 +197,25 @@ export class PatientLoginDialog {
   }
 
   public sendLoginOtp(): void {
-    this.loginEmail.markAsTouched();
-    if (this.loginEmail.invalid) return;
+    if (this.loginMethod() === "email") {
+      this.loginEmail.markAsTouched();
+      if (this.loginEmail.invalid || !this.loginEmail.value) return;
+    } else {
+      this.loginPhone.markAsTouched();
+      if (this.loginPhone.invalid || !this.loginPhone.value) return;
+    }
 
     this.loginOtpLoading.set(true);
     this.loginOtpSent.set(false);
     this.loginOtp.reset();
     this.serverError.set(null);
 
-    this.authService.sendLoginOtp({ email: this.loginEmail.value! }).subscribe({
+    const payload =
+      this.loginMethod() === "email"
+        ? { email: this.loginEmail.value! }
+        : { phone: this.loginFullPhone };
+
+    this.authService.sendLoginOtp(payload).subscribe({
       next: () => {
         this.loginOtpLoading.set(false);
         this.loginOtpSent.set(true);
@@ -297,15 +333,24 @@ export class PatientLoginDialog {
   }
 
   private submitLoginWithPassword(): void {
-    this.loginEmail.markAsTouched();
     this.loginPassword.markAsTouched();
-    if (this.loginEmail.invalid || this.loginPassword.invalid) return;
+    if (this.loginMethod() === "email") {
+      this.loginEmail.markAsTouched();
+      if (this.loginEmail.invalid || !this.loginEmail.value) return;
+    } else {
+      this.loginPhone.markAsTouched();
+      if (this.loginPhone.invalid || !this.loginPhone.value) return;
+    }
+    if (this.loginPassword.invalid || !this.loginPassword.value) return;
 
     this.isLoading.set(true);
-    const { email, password } = this.loginForm.getRawValue();
-    const payload: LoginRequest = { email: email!, password: password! };
+    const { password } = this.loginForm.getRawValue();
+    const loginPayload: LoginRequest =
+      this.loginMethod() === "email"
+        ? { email: this.loginEmail.value!, password: password! }
+        : { phone: this.loginFullPhone, password: password! };
 
-    this.authService.login(payload).subscribe({
+    this.authService.login(loginPayload).subscribe({
       next: () => {
         this.isLoading.set(false);
         this.dialogRef.close({ success: true });
@@ -320,7 +365,11 @@ export class PatientLoginDialog {
   private submitLoginWithOtp(): void {
     this.loginOtp.markAsTouched();
     if (!this.loginOtpSent()) {
-      this.serverError.set("Please send an OTP to your email first.");
+      this.serverError.set(
+        this.loginMethod() === "email"
+          ? "Please send an OTP to your email first."
+          : "Please send an OTP to your phone first.",
+      );
       return;
     }
     if (this.loginOtp.invalid || !this.loginOtp.value) {
@@ -329,7 +378,12 @@ export class PatientLoginDialog {
 
     this.isLoading.set(true);
 
-    this.authService.verifyLoginOtp({ email: this.loginEmail.value!, otp: this.loginOtp.value }).subscribe({
+    const verifyPayload =
+      this.loginMethod() === "email"
+        ? { email: this.loginEmail.value!, otp: this.loginOtp.value }
+        : { phone: this.loginFullPhone, otp: this.loginOtp.value };
+
+    this.authService.verifyLoginOtp(verifyPayload).subscribe({
       next: () => {
         this.isLoading.set(false);
         this.dialogRef.close({ success: true });

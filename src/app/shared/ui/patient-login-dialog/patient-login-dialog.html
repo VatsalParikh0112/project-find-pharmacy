@@ -100,10 +100,32 @@
         (ngSubmit)="onSubmit()"
         class="flex flex-col gap-5"
       >
+
+        <!-- EMAIL / PHONE TAB SWITCHER -->
+        <div class="flex rounded-2xl border border-white/10 bg-white/5 p-1">
+          <button
+            type="button"
+            (click)="setLoginMethod('email')"
+            class="flex flex-1 items-center justify-center gap-2 rounded-xl py-2 text-sm font-medium transition-all duration-300"
+            [class]="loginMethod() === 'email' ? 'bg-emerald-500 text-black' : 'text-white/50 hover:text-white/80'"
+          >
+            Email
+          </button>
+          <button
+            type="button"
+            (click)="setLoginMethod('phone')"
+            class="flex flex-1 items-center justify-center gap-2 rounded-xl py-2 text-sm font-medium transition-all duration-300"
+            [class]="loginMethod() === 'phone' ? 'bg-emerald-500 text-black' : 'text-white/50 hover:text-white/80'"
+          >
+            Phone
+          </button>
+        </div>
+
         <!-- PASSWORD MODE -->
         @if (!isOtpMode()) {
 
-        <!-- EMAIL -->
+        <!-- EMAIL INPUT (password mode) -->
+        @if (loginMethod() === 'email') {
         <div class="flex flex-col gap-2">
           <label class="text-sm text-white/70"> Email Address </label>
           <input
@@ -113,12 +135,40 @@
             class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
             [class]="loginEmail.touched && loginEmail.invalid ? 'border-red-500/50' : 'border-white/10'"
           />
-          @if (loginEmail.touched && loginEmail.hasError('required')) {
-            <span class="text-xs text-red-400"> Email is required </span>
-          } @else if (loginEmail.touched && loginEmail.hasError('email')) {
+          @if (loginEmail.touched && loginEmail.hasError('email')) {
             <span class="text-xs text-red-400"> Please enter a valid email </span>
           }
         </div>
+        }
+
+        <!-- PHONE INPUT (password mode) -->
+        @if (loginMethod() === 'phone') {
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Phone Number </label>
+          <div class="flex min-w-0 gap-2">
+            <select
+              (change)="onLoginCountryChange($event)"
+              class="h-13 w-22 shrink-0 cursor-pointer rounded-2xl border border-white/10 bg-white/5 px-2 text-xs outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:w-25 md:px-3 md:text-sm"
+            >
+              @for (country of countryCodes; track country.dial + country.name) {
+              <option [value]="country.dial" class="bg-emerald-950 text-white">
+                {{ country.flag }} {{ country.dial }}
+              </option>
+              }
+            </select>
+            <input
+              formControlName="phone"
+              type="tel"
+              placeholder="Phone number"
+              class="h-13 min-w-0 flex-1 rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
+              [class]="loginPhone.touched && loginPhone.invalid ? 'border-red-500/50' : 'border-white/10'"
+            />
+          </div>
+          @if (loginPhone.touched && loginPhone.hasError('pattern')) {
+            <span class="text-xs text-red-400"> Please enter a valid phone number </span>
+          }
+        </div>
+        }
 
         <!-- PASSWORD -->
         <div class="flex flex-col gap-2">
@@ -140,9 +190,7 @@
               {{ isPasswordVisible() ? 'Hide' : 'Show' }}
             </button>
           </div>
-          @if (loginPassword.touched && loginPassword.hasError('required')) {
-            <span class="text-xs text-red-400"> Password is required </span>
-          } @else if (loginPassword.touched && loginPassword.hasError('minlength')) {
+          @if (loginPassword.touched && loginPassword.hasError('minlength')) {
             <span class="text-xs text-red-400"> Password must be at least 6 characters </span>
           }
         </div>
@@ -152,7 +200,8 @@
         <!-- OTP MODE -->
         @if (isOtpMode()) {
 
-        <!-- EMAIL + SEND OTP -->
+        <!-- EMAIL + SEND OTP (otp mode) -->
+        @if (loginMethod() === 'email') {
         <div class="flex flex-col gap-2">
           <label class="text-sm text-white/70"> Email Address </label>
           <div class="flex gap-2">
@@ -179,12 +228,55 @@
               }
             </button>
           </div>
-          @if (loginEmail.touched && loginEmail.hasError('required')) {
-            <span class="text-xs text-red-400"> Email is required </span>
-          } @else if (loginEmail.touched && loginEmail.hasError('email')) {
+          @if (loginEmail.touched && loginEmail.hasError('email')) {
             <span class="text-xs text-red-400"> Please enter a valid email </span>
           }
         </div>
+        }
+
+        <!-- PHONE + SEND OTP (otp mode) -->
+        @if (loginMethod() === 'phone') {
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-white/70"> Phone Number </label>
+          <div class="flex min-w-0 gap-2">
+            <select
+              (change)="onLoginCountryChange($event)"
+              class="h-13 w-22 shrink-0 cursor-pointer rounded-2xl border border-white/10 bg-white/5 px-2 text-xs outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:w-25 md:px-3 md:text-sm"
+            >
+              @for (country of countryCodes; track country.dial + country.name) {
+              <option [value]="country.dial" class="bg-emerald-950 text-white">
+                {{ country.flag }} {{ country.dial }}
+              </option>
+              }
+            </select>
+            <input
+              formControlName="phone"
+              type="tel"
+              placeholder="Phone number"
+              class="h-13 min-w-0 flex-1 rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
+              [class]="loginPhone.touched && loginPhone.invalid ? 'border-red-500/50' : 'border-white/10'"
+            />
+            <button
+              type="button"
+              (click)="sendLoginOtp()"
+              [disabled]="loginOtpLoading() || loginOtpSent()"
+              class="h-13 shrink-0 rounded-2xl px-4 text-sm font-semibold transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60 md:h-14"
+              [class]="loginOtpSent() ? 'border border-emerald-500/30 bg-emerald-500/20 text-emerald-300' : 'bg-emerald-500 text-black hover:bg-emerald-400'"
+            >
+              @if (loginOtpLoading()) {
+                <span class="inline-block size-4 animate-spin rounded-full border-2 border-black/30 border-t-black"></span>
+              } @else if (loginOtpSent()) {
+                Sent ✓
+              } @else {
+                Send
+              }
+            </button>
+          </div>
+          @if (loginPhone.touched && loginPhone.hasError('pattern')) {
+            <span class="text-xs text-red-400"> Please enter a valid phone number </span>
+          }
+        </div>
+        }
 
         <!-- OTP INPUT (shown after send) -->
         @if (loginOtpSent()) {
@@ -534,7 +626,7 @@
             (click)="backToForm()"
             class="text-sm text-white/40 transition-colors hover:text-white/70"
           >
-            ← Edit details
+            Edit details
           </button>
 
           <!-- RESEND -->
