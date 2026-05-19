@@ -40,10 +40,7 @@ export class CommonTopbar {
     });
   }
 
-  public readonly menuItems: {
-    label: string;
-    route: string;
-  }[] = [
+  public readonly menuItems: { label: string; route: string }[] = [
     { label: "Home", route: "home" },
     { label: "About Us", route: "about" },
     { label: "Contact Us", route: "contact" },

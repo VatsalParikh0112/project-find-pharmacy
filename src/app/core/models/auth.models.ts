@@ -8,9 +8,9 @@ export interface RegisterRequest {
   name: string;
   email: string;
   password: string;
-  phone?: string;
+  phone: string;
   emailOtp: string;
-  phoneOtp?: string;
+  phoneOtp: string;
 }
 
 export interface SendRegistrationOtpRequest {
@@ -53,6 +53,11 @@ export interface AuthResponse {
   message: string;
   token: string;
   user: AuthUser;
+}
+
+export interface MessageResponse {
+  success: boolean;
+  message: string;
 }
 
 export interface ApiValidationError {

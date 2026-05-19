@@ -72,6 +72,7 @@ export class PatientLoginDialog {
   public readonly isPasswordVisible = signal(false);
   public readonly isConfirmPasswordVisible = signal(false);
   public readonly otpSent = signal(false);
+  public readonly otpPhoneSent = signal(false);
   public readonly otpResending = signal(false);
   public readonly loginOtpSent = signal(false);
   public readonly loginOtpLoading = signal(false);
@@ -83,6 +84,7 @@ export class PatientLoginDialog {
 
   public readonly countryCodes = COUNTRY_CODES;
 
+  // LOGIN FORM — email + password + loginOtp (used in OTP mode)
   public readonly loginForm = this.fb.group({
     email: ["", [Validators.email]],
     phone: ["", [Validators.pattern(/^[0-9]{4,14}$/)]],
@@ -90,15 +92,16 @@ export class PatientLoginDialog {
     otp: ["", [Validators.pattern(/^\d{6}$/)]],
   });
 
+  // REGISTER FORM
   public readonly registerForm = this.fb.group(
     {
       name: ["", [Validators.required, Validators.maxLength(50)]],
       email: ["", [Validators.required, Validators.email]],
-      phone: ["", [Validators.pattern(/^[0-9]{4,14}$/)]],
+      phone: ["", [Validators.required, Validators.pattern(/^[0-9]{4,14}$/)]],
       password: ["", [Validators.required, Validators.minLength(6)]],
       confirmPassword: ["", [Validators.required]],
       emailOtp: ["", [Validators.required, Validators.pattern(/^\d{6}$/)]],
-      phoneOtp: ["", [Validators.pattern(/^\d{6}$/)]],
+      phoneOtp: ["", [Validators.required, Validators.pattern(/^\d{6}$/)]],
     },
     { validators: passwordMatchValidator },
   );
@@ -185,6 +188,7 @@ export class PatientLoginDialog {
     this.selectedCountryCode.set(COUNTRY_CODES[0]);
     this.otpSentToEmail = "";
     this.otpSentToPhone = "";
+    this.otpPhoneSent.set(false);
     this.loginForm.reset();
     this.registerForm.reset();
   }
@@ -237,6 +241,7 @@ export class PatientLoginDialog {
 
   public backToForm(): void {
     this.otpSent.set(false);
+    this.otpPhoneSent.set(false);
     this.serverError.set(null);
     this.regEmailOtp.reset();
     this.regPhoneOtp.reset();
@@ -261,12 +266,11 @@ export class PatientLoginDialog {
     const detailControls = ["name", "email", "phone", "password", "confirmPassword"];
     detailControls.forEach((c) => this.registerForm.get(c)?.markAsTouched());
 
-    const detailsValid = ["name", "email", "password", "confirmPassword"].every(
+    const detailsValid = ["name", "email", "phone", "password", "confirmPassword"].every(
       (c) => this.registerForm.get(c)?.valid,
     );
-    const phoneValid = !this.regPhone.value || this.regPhone.valid;
 
-    if (!detailsValid || !phoneValid || this.passwordMismatch) return;
+    if (!detailsValid || this.passwordMismatch) return;
 
     const currentEmail = this.regEmail.value!;
     const currentPhone = this.fullPhone;
@@ -274,7 +278,6 @@ export class PatientLoginDialog {
     // Skip re-sending if email and phone are unchanged and OTPs were already sent
     if (!forceResend && currentEmail === this.otpSentToEmail && currentPhone === this.otpSentToPhone) {
       this.regEmailOtp.reset();
-      this.regPhoneOtp.reset();
       this.otpSent.set(true);
       return;
     }
@@ -286,10 +289,11 @@ export class PatientLoginDialog {
       : { email: currentEmail };
 
     this.authService.sendRegistrationOtp(payload).subscribe({
-      next: () => {
+      next: (res) => {
         this.isLoading.set(false);
         this.otpSentToEmail = currentEmail;
         this.otpSentToPhone = currentPhone;
+        this.otpPhoneSent.set(res.phoneSent);
         this.regEmailOtp.reset();
         this.regPhoneOtp.reset();
         this.otpSent.set(true);
@@ -312,8 +316,9 @@ export class PatientLoginDialog {
       : { email: this.otpSentToEmail };
 
     this.authService.sendRegistrationOtp(payload).subscribe({
-      next: () => {
+      next: (res) => {
         this.otpResending.set(false);
+        this.otpPhoneSent.set(res.phoneSent);
         this.regEmailOtp.reset();
         this.regPhoneOtp.reset();
       },
@@ -375,7 +380,6 @@ export class PatientLoginDialog {
     if (this.loginOtp.invalid || !this.loginOtp.value) {
       return;
     }
-
     this.isLoading.set(true);
 
     const verifyPayload =
@@ -397,21 +401,19 @@ export class PatientLoginDialog {
 
   private submitRegister(): void {
     this.regEmailOtp.markAsTouched();
-    if (this.regPhone.value) this.regPhoneOtp.markAsTouched();
-
-    if (this.regEmailOtp.invalid) return;
-    if (this.regPhone.value && this.regPhoneOtp.invalid) return;
+    this.regPhoneOtp.markAsTouched();
+    if (this.regEmailOtp.invalid || this.regPhoneOtp.invalid) return;
 
     this.isLoading.set(true);
     const { name, email, password, emailOtp, phoneOtp } = this.registerForm.getRawValue();
-    const phone = this.fullPhone;
 
     const payload: RegisterRequest = {
       name: name!,
       email: email!,
       password: password!,
+      phone: this.fullPhone,
       emailOtp: emailOtp!,
-      ...(phone ? { phone, phoneOtp: phoneOtp! } : {}),
+      phoneOtp: phoneOtp!,
     };
 
     this.authService.register(payload).subscribe({

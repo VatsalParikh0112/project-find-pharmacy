@@ -130,7 +130,8 @@
           <label class="text-sm text-white/70"> Email Address </label>
           <input
             formControlName="email"
-            type="text"
+            type="email"
+            autocomplete="email"
             placeholder="Enter your email address"
             class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
             [class]="loginEmail.touched && loginEmail.invalid ? 'border-red-500/50' : 'border-white/10'"
@@ -207,7 +208,8 @@
           <div class="flex gap-2">
             <input
               formControlName="email"
-              type="text"
+              type="email"
+              autocomplete="email"
               placeholder="Enter your email address"
               class="h-13 min-w-0 flex-1 rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
               [class]="loginEmail.touched && loginEmail.invalid ? 'border-red-500/50' : 'border-white/10'"
@@ -385,7 +387,8 @@
 
           <input
             formControlName="email"
-            type="text"
+            type="email"
+            autocomplete="email"
             placeholder="Enter your email address"
             class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
             [class]="regEmail.touched && regEmail.invalid ? 'border-red-500/50' : 'border-white/10'"
@@ -410,12 +413,8 @@
               (change)="onCountryChange($event)"
               class="h-13 w-22 shrink-0 cursor-pointer rounded-2xl border border-white/10 bg-white/5 px-2 text-xs outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:w-25 md:px-3 md:text-sm"
             >
-              @for (country of countryCodes; track country.dial +
-              country.name) {
-              <option
-                [value]="country.dial"
-                class="bg-emerald-950 text-white"
-              >
+              @for (country of countryCodes; track country.dial + country.name) {
+              <option [value]="country.dial" class="bg-emerald-950 text-white">
                 {{ country.flag }} {{ country.dial }}
               </option>
               }
@@ -424,16 +423,17 @@
             <input
               formControlName="phone"
               type="tel"
-              placeholder="Phone number"
+              autocomplete="tel"
+              placeholder="Phone number (required)"
               class="h-13 min-w-0 flex-1 rounded-2xl border bg-white/5 px-4 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
               [class]="regPhone.touched && regPhone.invalid ? 'border-red-500/50' : 'border-white/10'"
             />
           </div>
 
-          @if (regPhone.touched && regPhone.hasError('pattern')) {
-          <span class="text-xs text-red-400">
-            Please enter a valid phone number
-          </span>
+          @if (regPhone.touched && regPhone.hasError('required')) {
+          <span class="text-xs text-red-400"> Phone number is required </span>
+          } @else if (regPhone.touched && regPhone.hasError('pattern')) {
+          <span class="text-xs text-red-400"> Please enter a valid phone number </span>
           }
         </div>
 
@@ -446,6 +446,7 @@
               formControlName="password"
               [type]="isPasswordVisible() ? 'text' : 'password'"
               placeholder="Enter your password"
+              autocomplete="new-password"
               class="h-13 w-full rounded-2xl border bg-white/5 px-4 pr-16 text-sm outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5 md:pr-16"
               [class]="regPassword.touched && regPassword.invalid ? 'border-red-500/50' : 'border-white/10'"
             />
@@ -544,19 +545,13 @@
         <div
           class="wrap-break-word rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-4 text-sm leading-relaxed text-emerald-300"
         >
-          OTPs sent to
-          <span class="font-semibold">{{ regEmail.value }}</span>
-
-          @if (regPhone.value) {
-          and
-          <span class="font-semibold">{{ fullPhone }}</span>
-          }
+          OTPs sent to <span class="font-semibold">{{ regEmail.value }}</span>
+          and <span class="font-semibold">{{ fullPhone }}</span>
         </div>
 
         <!-- EMAIL OTP -->
         <div class="flex flex-col gap-2">
           <label class="text-sm text-white/70"> Email OTP </label>
-
           <input
             formControlName="emailOtp"
             type="text"
@@ -566,25 +561,16 @@
             class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-center text-sm tracking-[0.25em] outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
             [class]="regEmailOtp.touched && regEmailOtp.invalid ? 'border-red-500/50' : 'border-white/10'"
           />
-
-          @if (regEmailOtp.touched &&
-          regEmailOtp.hasError('required')) {
-          <span class="text-xs text-red-400">
-            Email OTP is required
-          </span>
-          } @else if (regEmailOtp.touched &&
-          regEmailOtp.hasError('pattern')) {
-          <span class="text-xs text-red-400">
-            Please enter a valid 6-digit OTP
-          </span>
+          @if (regEmailOtp.touched && regEmailOtp.hasError('required')) {
+          <span class="text-xs text-red-400"> Email OTP is required </span>
+          } @else if (regEmailOtp.touched && regEmailOtp.hasError('pattern')) {
+          <span class="text-xs text-red-400"> Please enter a valid 6-digit OTP </span>
           }
         </div>
 
         <!-- PHONE OTP -->
-        @if (regPhone.value) {
         <div class="flex flex-col gap-2">
           <label class="text-sm text-white/70"> Phone OTP </label>
-
           <input
             formControlName="phoneOtp"
             type="text"
@@ -594,15 +580,12 @@
             class="h-13 w-full rounded-2xl border bg-white/5 px-4 text-center text-sm tracking-[0.25em] outline-none transition-all duration-300 focus:border-emerald-400 md:h-14 md:px-5"
             [class]="regPhoneOtp.touched && regPhoneOtp.invalid ? 'border-red-500/50' : 'border-white/10'"
           />
-
-          @if (regPhoneOtp.touched &&
-          regPhoneOtp.hasError('pattern')) {
-          <span class="text-xs text-red-400">
-            Please enter a valid 6-digit OTP
-          </span>
+          @if (regPhoneOtp.touched && regPhoneOtp.hasError('required')) {
+          <span class="text-xs text-red-400"> Phone OTP is required </span>
+          } @else if (regPhoneOtp.touched && regPhoneOtp.hasError('pattern')) {
+          <span class="text-xs text-red-400"> Please enter a valid 6-digit OTP </span>
           }
         </div>
-        }
 
         <!-- VERIFY -->
         <button
@@ -647,6 +630,7 @@
         }
       </form>
       }
+
     </div>
   </div>
 </div>
